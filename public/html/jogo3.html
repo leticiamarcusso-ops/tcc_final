@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza das Frações — Jogaê</title>
+  <script src="../js/require-auth.js"></script>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Jogo de frações e equivalências matemáticas. Fatie e monte pizzas para os clientes na Pizzaria do Jogaê!">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/jogo3.css">
+</head>
+<body data-page="jogo3" class="pizza-theme">
+
+  <!-- TOPBAR / HUD HEADER -->
+  <header class="game-hud-topbar">
+    <div class="hud-topbar-container">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="jogos.html" class="btn btn-outline btn-sm">
+          <i class="ph-bold ph-arrow-left"></i> Voltar aos Jogos
+        </a>
+        <img src="../../assets/img/logo.png" alt="Jogaê Logo" style="height: 38px; width: auto;">
+        <div class="font-orbitron font-bold text-sm text-pizza-gold">PIZZA DAS FRAÇÕES</div>
+      </div>
+
+      <!-- SELETOR DE DIFICULDADE & PERFIL -->
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div class="select-nivel-wrapper" style="display: flex; align-items: center; gap: 6px;">
+          <label for="nivel-select" class="text-xs text-muted">Dificuldade:</label>
+          <select id="nivel-select" class="form-control input-sm" style="width: auto; padding: 4px 8px;">
+            <option value="facil">Fácil</option>
+            <option value="medio">Médio</option>
+            <option value="dificil">Difícil</option>
+          </select>
+        </div>
+
+        <div class="hud-user-info" style="display: flex; align-items: center; gap: 8px;">
+          <span id="topbar-avatar" style="font-size: 1.2rem;">👨‍🍳</span>
+          <span id="topbar-nome" class="font-bold text-sm">Pizzaiolo</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL DO JOGO -->
+  <main class="game-container">
+    
+    <!-- BARRA DE STATUS / MÉTRICAS -->
+    <section class="hud-status-bar card">
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">PONTUAÇÃO (XP)</span>
+        <span class="hud-stat-value text-pizza-gold font-orbitron" id="hud-score">0</span>
+      </div>
+
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">STATUS DO PEDIDO</span>
+        <span class="hud-stat-value font-orbitron" id="hud-phase">Pedido 1/5</span>
+      </div>
+
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">QUALIDADE DO CHEF</span>
+        <span class="hud-stat-value" id="hud-patience">⭐⭐⭐</span>
+      </div>
+
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">TÓPICO MATEMÁTICO</span>
+        <span class="hud-stat-value text-sm font-bold" style="color: var(--color-brand-cyan);">Partes de um Todo</span>
+      </div>
+    </section>
+
+    <!-- ARENA DA PIZZA & COMANDA -->
+    <div class="pizza-arena">
+      
+      <!-- LADO ESQUERDO: ASSADEIRA E PIZZA INTERATIVA -->
+      <section class="pizza-board-card">
+        <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+          <span class="badge badge-warning"><i class="ph-bold ph-pizza"></i> Forno a Lenha</span>
+          <span class="text-xs text-muted" id="count-fatias-label">0 de 8 fatias selecionadas</span>
+        </div>
+
+        <!-- TÁBUA REDONDA DE MADEIRA COM SVG -->
+        <div class="wooden-board">
+          <svg id="pizza-svg" class="pizza-svg" viewBox="0 0 300 300"></svg>
+        </div>
+
+        <!-- CONTADOR DE FRAÇÃO EM TEMPO REAL -->
+        <div class="fraction-counter-strip">
+          <div class="fraction-badge-box">
+            <span class="text-xs text-muted font-bold">Fração Atual:</span>
+            <div class="fraction-visual-display">
+              <span class="fraction-num" id="count-num">0</span>
+              <span class="fraction-den" id="count-den">8</span>
+            </div>
+            <span class="badge badge-emerald" id="count-pct" style="margin-left: 6px;">0% da pizza</span>
+          </div>
+
+          <!-- BOTÕES RÁPIDOS DE AJUDA -->
+          <div class="slice-quick-tools">
+            <button type="button" class="btn-slice-tool" id="btn-tool-clear">
+              <i class="ph-bold ph-arrow-counter-clockwise"></i> Limpar
+            </button>
+            <button type="button" class="btn-slice-tool" id="btn-tool-add">
+              <i class="ph-bold ph-plus"></i> +1 Fatia
+            </button>
+            <button type="button" class="btn-slice-tool" id="btn-tool-half">
+              <i class="ph-bold ph-scales"></i> Metade (1/2)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- LADO DIREITO: COMANDA DO PEDIDO & BOTÃO DE SERVIR -->
+      <section class="order-ticket-panel">
+        
+        <div class="order-badge-header">
+          <i class="ph-bold ph-receipt"></i> Comanda da Mesa — Pedido de Fração
+        </div>
+
+        <div>
+          <h2 class="order-prompt" id="order-text">
+            Carregando pedido da pizzaria...
+          </h2>
+          <p class="order-instruction" id="order-instruction">
+            Clique nas fatias da pizza à esquerda para selecionar a fração correspondente.
+          </p>
+        </div>
+
+        <!-- FEEDBACK CARD -->
+        <div id="feedback-card" class="pizza-feedback"></div>
+
+        <!-- PAINEL DE DICAS DIDÁTICAS -->
+        <div>
+          <div class="hints-row">
+            <button type="button" id="btn-dica1" class="btn btn-outline btn-sm">
+              <i class="ph-bold ph-lightbulb"></i> Dica 1 (-10 XP)
+            </button>
+            <button type="button" id="btn-dica2" class="btn btn-outline btn-sm">
+              <i class="ph-bold ph-lightbulb-filament"></i> Dica 2 (-20 XP)
+            </button>
+          </div>
+          <div id="hint1-text" class="hint-box"></div>
+          <div id="hint2-text" class="hint-box"></div>
+        </div>
+
+        <!-- BOTÃO PRINCIPAL DE ENVIO -->
+        <div class="pizza-controls-area">
+          <button type="button" id="btn-servir-pizza" class="btn-serve-pizza">
+            <i class="ph-bold ph-check-circle" style="font-size: 1.4rem;"></i>
+            Entregar Pedido ao Cliente
+          </button>
+          <span class="text-xs text-muted text-center">
+            Dica: você pode clicar diretamente nas fatias da pizza para pegar ou devolver!
+          </span>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL DE VITÓRIA / CONCLUSÃO DA RODADA -->
+  <div id="victory-overlay" class="gameover-overlay hidden">
+    <div class="gameover-modal card text-center">
+      <div style="font-size: 3.5rem; margin-bottom: 4px;">🍕</div>
+      <h2 class="text-2xl font-bold font-orbitron text-pizza-gold">Rodada Concluída!</h2>
+      <p class="text-secondary text-sm">Você entregou todos os pedidos com alta precisão matemática!</p>
+
+      <div class="pizza-star-rating" id="vic-stars">⭐⭐⭐</div>
+
+      <div style="margin: 20px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <div class="card" style="background: rgba(255,255,255,0.04); padding: 10px;">
+          <span class="text-xs text-muted">Pontos XP</span>
+          <div class="text-lg font-bold font-orbitron text-pizza-gold" id="vic-score">0</div>
+        </div>
+        <div class="card" style="background: rgba(255,255,255,0.04); padding: 10px;">
+          <span class="text-xs text-muted">Acertos</span>
+          <div class="text-lg font-bold font-orbitron" id="vic-acertos" style="color: var(--color-success);">0</div>
+        </div>
+        <div class="card" style="background: rgba(255,255,255,0.04); padding: 10px;">
+          <span class="text-xs text-muted">Erros</span>
+          <div class="text-lg font-bold font-orbitron" id="vic-erros" style="color: var(--color-error);">0</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <button id="btn-jogar-novamente" class="btn btn-primary btn-lg">
+          <i class="ph-bold ph-arrows-clockwise"></i> Jogar Novamente
+        </button>
+        <button id="btn-voltar-jogos" class="btn btn-secondary btn-lg">
+          <i class="ph-bold ph-game-controller"></i> Ver Todos os Jogos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/jogo3.js"></script>
+</body>
+</html>

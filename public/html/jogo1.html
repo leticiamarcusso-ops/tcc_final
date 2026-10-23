@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batalha Espacial das Operações — Jogaae</title>
+  <script src="../js/require-auth.js"></script>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Jogo de números inteiros positivos e negativos. Batalha espacial interativa.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/jogo1.css">
+  <link rel="stylesheet" href="../css/jogos-visual.css">
+</head>
+<body data-page="jogo1" class="space-theme">
+
+  <!-- TOPBAR / GAME HUD HEADER -->
+  <header class="game-hud-topbar">
+    <div class="hud-topbar-container">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="jogos.html" class="btn btn-outline btn-sm" id="btn-menu-jogo1">
+          <i class="ph-bold ph-arrow-left"></i> Voltar aos Jogos
+        </a>
+        <img src="../../assets/img/logo.png" alt="Jogaê Logo" style="height: 38px; width: auto;">
+        <div class="font-orbitron font-bold text-sm text-gradient">BATALHA ESPACIAL</div>
+      </div>
+
+      <!-- SELECT NIVEL -->
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div class="select-nivel-wrapper">
+          <label for="nivel-select" class="text-xs text-muted" style="margin-right: 6px;">Nível:</label>
+          <select id="nivel-select" class="form-control input-sm" style="width: auto; padding: 4px 8px;">
+            <option value="facil">Fácil</option>
+            <option value="medio">Médio</option>
+            <option value="dificil">Difícil</option>
+          </select>
+        </div>
+
+        <!-- USER INFO -->
+        <div class="hud-user-info" style="display: flex; align-items: center; gap: 8px;">
+          <span id="topbar-avatar" style="font-size: 1.2rem;">👤</span>
+          <span id="topbar-nome" class="font-bold text-sm">Jogador</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN GAME AREA -->
+  <main class="game-container">
+    
+    <!-- STATS BAR (HUD) -->
+    <div class="hud-status-bar card">
+      
+      <!-- PONTUAÇÃO -->
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">PONTUAÇÃO</span>
+        <span class="hud-stat-value text-primary font-orbitron" id="hud-score">000.000</span>
+      </div>
+
+      <!-- FASE -->
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">MISSÃO</span>
+        <span class="hud-stat-value font-orbitron" id="hud-phase">Missão 1/10</span>
+      </div>
+
+      <!-- VIDAS -->
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">VIDAS</span>
+        <div class="lives-display" id="lives-display">
+          <span class="live-heart">❤️</span>
+          <span class="live-heart">❤️</span>
+          <span class="live-heart">❤️</span>
+        </div>
+      </div>
+
+      <!-- ENERGIA DA NAVE -->
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">ENERGIA (<span id="hud-energy">100%</span>)</span>
+        <div class="energy-bar" id="energy-bar">
+          <div class="energy-fill" id="energy-fill" style="width: 100%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARENA DE BATALHA ESPACIAL -->
+    <section class="space-arena">
+      
+      <!-- NAVE ESPACIAL SVG ANIMADA -->
+      <div class="spaceship-container">
+        <svg id="spaceship-svg" class="spaceship-svg" viewBox="0 0 100 100">
+          <!-- Asas -->
+          <polygon points="50,10 20,85 50,70 80,85" fill="url(#shipGradient)" />
+          <!-- Cockpit / Cabine -->
+          <circle cx="50" cy="40" r="14" fill="#60A5FA" opacity="0.9" />
+          <!-- Propulsores / Fogo -->
+          <polygon points="42,75 50,95 58,75" fill="#F59E0B" class="thruster-fire" />
+          
+          <defs>
+            <linearGradient id="shipGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#D946EF" />
+              <stop offset="100%" stop-color="#1687F8" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- PAINEL DA PERGUNTA / ASTEROIDE -->
+      <div class="question-panel card">
+        <div class="question-badge">
+          <i class="ph-bold ph-lightning"></i> Resolva o cálculo para disparar o laser:
+        </div>
+        <div class="question-display" id="question-text">
+          Carregando missão...
+        </div>
+
+        <!-- INPUT DE RESPOSTA -->
+        <div class="answer-controls">
+          <input type="number" id="answer-input" class="form-control answer-input" placeholder="Digite sua resposta..." autocomplete="off">
+          <button id="btn-confirmar" class="btn btn-primary btn-lg">
+            Disparar <i class="ph-bold ph-crosshair"></i>
+          </button>
+        </div>
+
+        <!-- FEEDBACK CARD -->
+        <div id="feedback-card" class="feedback-card"></div>
+
+        <!-- PAINEL DE DICAS -->
+        <div class="hints-panel">
+          <button id="btn-dica1" class="btn btn-outline btn-sm">
+            <i class="ph-bold ph-lightbulb"></i> Dica 1 (-10 XP)
+          </button>
+          <button id="btn-dica2" class="btn btn-outline btn-sm">
+            <i class="ph-bold ph-lightbulb-filament"></i> Dica 2 (-20 XP)
+          </button>
+        </div>
+        <div id="hint1-text" class="hint-text"></div>
+        <div id="hint2-text" class="hint-text"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- GAMEOVER / VITÓRIA OVERLAY MODAL -->
+  <div id="gameover-overlay" class="gameover-overlay hidden">
+    <div class="gameover-modal card text-center">
+      <div id="go-emoji" style="font-size: 4rem; margin-bottom: 8px;">🏆</div>
+      <h2 id="go-title" class="text-3xl font-bold font-orbitron" style="margin-bottom: 8px;">Missão Completa!</h2>
+      <p class="text-secondary text-sm">Resumo da sua expedição espacial:</p>
+
+      <div class="go-stats-grid" style="margin: 24px 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+        <div class="card" style="background: rgba(255,255,255,0.05); padding: 12px;">
+          <span class="text-xs text-muted">Pontuação Total</span>
+          <div class="text-xl font-bold text-primary font-orbitron" id="go-score">0</div>
+        </div>
+        <div class="card" style="background: rgba(255,255,255,0.05); padding: 12px;">
+          <span class="text-xs text-muted">Fases Concluídas</span>
+          <div class="text-xl font-bold font-orbitron" id="go-fase">0</div>
+        </div>
+        <div class="card" style="background: rgba(255,255,255,0.05); padding: 12px;">
+          <span class="text-xs text-muted">Acertos</span>
+          <div class="text-xl font-bold text-emerald-400 font-orbitron" id="go-acertos" style="color: var(--color-success)">0</div>
+        </div>
+        <div class="card" style="background: rgba(255,255,255,0.05); padding: 12px;">
+          <span class="text-xs text-muted">Erros</span>
+          <div class="text-xl font-bold text-rose-400 font-orbitron" id="go-erros" style="color: var(--color-error)">0</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <button id="btn-jogar-novamente" class="btn btn-primary btn-lg">
+          <i class="ph-bold ph-arrows-clockwise"></i> Jogar Novamente
+        </button>
+        <button id="btn-voltar-dashboard" class="btn btn-secondary btn-lg">
+          <i class="ph-bold ph-game-controller"></i> Ver Todos os Jogos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/jogo1.js"></script>
+</body>
+</html>

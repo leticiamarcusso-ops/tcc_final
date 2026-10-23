@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Videoaulas — Jogaê</title>
+  <script src="../js/require-auth.js"></script>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Encontre videoaulas de Matemática para acompanhar seus estudos no Jogaê.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="../../assets/img/logo.png" alt="Jogaê Logo" class="nav-logo-img">
+      </a>
+      <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Abrir menu">
+        <i class="ph-bold ph-list"></i>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="dashboard.html" class="nav-link"><i class="ph-bold ph-house"></i> Início</a>
+        <a href="jogos.html" class="nav-link"><i class="ph-bold ph-game-controller"></i> Jogos</a>
+        <a href="videoaulas.html" class="nav-link active" aria-current="page"><i class="ph-bold ph-youtube-logo"></i> Videoaulas</a>
+        <a href="ranking.html" class="nav-link"><i class="ph-bold ph-trophy"></i> Ranking</a>
+        <a href="perfil.html" class="nav-link"><i class="ph-bold ph-user-circle"></i> Perfil</a>
+        <button id="btn-logout" class="btn btn-outline btn-sm" style="margin-left: 8px;">
+          <i class="ph-bold ph-sign-out"></i> Sair
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container page-content">
+    <section class="learning-videos" aria-labelledby="student-video-title">
+      <div class="learning-videos-heading">
+        <span class="learning-videos-icon"><i class="ph-bold ph-youtube-logo"></i></span>
+        <div>
+          <h1 id="student-video-title">Videoaulas para estudar</h1>
+          <p>Busque um assunto ou escolha um dos temas de Matemática.</p>
+        </div>
+      </div>
+      <form class="learning-videos-search" action="https://www.youtube.com/results" method="get" target="_blank" rel="noopener noreferrer">
+        <label class="sr-only" for="student-video-search">Assunto da videoaula</label>
+        <input class="form-control" id="student-video-search" type="search" name="search_query" placeholder="Ex.: divisão de frações" minlength="2" required>
+        <button type="submit" class="btn btn-primary"><i class="ph-bold ph-magnifying-glass"></i> Buscar aulas</button>
+      </form>
+      <div class="learning-video-topics" aria-label="Assuntos sugeridos">
+        <a href="https://www.youtube.com/results?search_query=videoaula+matematica+numeros+inteiros+6+ano" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-calculator"></i> Números inteiros</a>
+        <a href="https://www.youtube.com/results?search_query=videoaula+equacao+do+primeiro+grau+8+ano" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-scales"></i> Equações</a>
+        <a href="https://www.youtube.com/results?search_query=videoaula+matematica+fracoes+6+ano" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-pizza"></i> Frações</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script>
+    document.getElementById('nav-toggle')?.addEventListener('click', () => {
+      document.getElementById('nav-links')?.classList.toggle('open');
+    });
+
+    document.getElementById('btn-logout')?.addEventListener('click', async () => {
+      try {
+        await api.post('/auth/logout.php');
+        limparUsuarioLocal();
+        window.location.href = 'login.html';
+      } catch (error) {
+        showToast(error.message, 'error');
+      }
+    });
+  </script>
+</body>
+</html>

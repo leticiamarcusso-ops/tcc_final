@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Conta — Jogaê</title>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Crie sua conta gratuita no Jogaê. Escolha entre perfil de Aluno ou Professor de Matemática.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body data-page="cadastro">
+
+  <main class="auth-page">
+    <div class="auth-container">
+      
+      <!-- LADO ESQUERDO / BRANDING COM MASCOTE -->
+      <div class="auth-branding">
+        <div>
+          <a href="index.html" style="display: inline-block;">
+            <img src="../../assets/img/logo.png" alt="Jogaê Logo" class="auth-branding-logo-img">
+          </a>
+          <h2 class="auth-branding__title mt-md">Junte-se ao Jogaê! 🎓</h2>
+          <p class="auth-branding__tagline">
+            Plataforma educacional desenvolvida para transformar o ensino e aprendizado de matemática no Ensino Fundamental II.
+          </p>
+        </div>
+
+        <div class="auth-branding__features">
+          <div class="auth-feature-item">
+            <i class="ph-bold ph-student"></i>
+            <span><strong>Alunos:</strong> Jogos, pontuação XP e conquistas</span>
+          </div>
+          <div class="auth-feature-item">
+            <i class="ph-bold ph-chalkboard-teacher"></i>
+            <span><strong>Professores:</strong> Gestão de turmas e relatórios</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LADO DIREITO / FORMULÁRIO DE CADASTRO -->
+      <div class="auth-form-panel">
+        <div class="auth-form-header">
+          <h1>Criar Conta Gratuita</h1>
+          <p>Escolha seu perfil e preencha seus dados</p>
+        </div>
+
+        <form id="cadastro-form" class="auth-form">
+          <div id="cadastro-error" class="form-error"></div>
+
+          <!-- SELEÇÃO DE PERFIL (ALUNO OU PROFESSOR) -->
+          <div class="auth-form-group">
+            <label>Tipo de Conta</label>
+            <div class="perfil-role-grid">
+              
+              <!-- Opção Aluno -->
+              <div class="perfil-role-card selected" id="role-aluno">
+                <input type="radio" name="perfil" value="aluno" checked id="radio-aluno">
+                <div class="perfil-role-info">
+                  <span class="title"><i class="ph-bold ph-student"></i> Aluno</span>
+                  <span class="subtitle">Aprender e jogar</span>
+                </div>
+              </div>
+
+              <!-- Opção Professor -->
+              <div class="perfil-role-card" id="role-professor">
+                <input type="radio" name="perfil" value="professor" id="radio-professor">
+                <div class="perfil-role-info">
+                  <span class="title"><i class="ph-bold ph-chalkboard-teacher"></i> Professor</span>
+                  <span class="subtitle">Gerenciar turmas</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="nome">Nome Completo</label>
+            <div class="auth-input-wrapper">
+              <i class="ph-bold ph-user"></i>
+              <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required autocomplete="name">
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="email">E-mail</label>
+            <div class="auth-input-wrapper">
+              <i class="ph-bold ph-envelope"></i>
+              <input type="email" id="email" name="email" placeholder="seu.email@escola.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="senha">Senha</label>
+            <div class="auth-input-wrapper">
+              <i class="ph-bold ph-lock-key"></i>
+              <input type="password" id="senha" name="senha" placeholder="Mínimo 6 caracteres" required autocomplete="new-password">
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="senha_confirm">Confirmar Senha</label>
+            <div class="auth-input-wrapper">
+              <i class="ph-bold ph-lock-key"></i>
+              <input type="password" id="senha_confirm" name="senha_confirm" placeholder="Repita a senha" required autocomplete="new-password">
+            </div>
+          </div>
+
+          <div style="margin-top: var(--space-md);">
+            <button type="submit" id="btn-cadastrar" class="btn btn-primary btn-lg" style="width: 100%;">
+              Criar Conta e Começar <i class="ph-bold ph-rocket-launch"></i>
+            </button>
+          </div>
+
+          <div class="auth-form-footer">
+            Já possui uma conta? <a href="login.html">Fazer login</a>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    // Handler simples para o seletor visual de Aluno / Professor
+    document.addEventListener('DOMContentLoaded', () => {
+      const cardAluno = document.getElementById('role-aluno');
+      const cardProf  = document.getElementById('role-professor');
+      const radioAluno = document.getElementById('radio-aluno');
+      const radioProf  = document.getElementById('radio-professor');
+
+      cardAluno?.addEventListener('click', () => {
+        cardAluno.classList.add('selected');
+        cardProf.classList.remove('selected');
+        radioAluno.checked = true;
+      });
+
+      cardProf?.addEventListener('click', () => {
+        cardProf.classList.add('selected');
+        cardAluno.classList.remove('selected');
+        radioProf.checked = true;
+      });
+    });
+  </script>
+</body>
+</html>

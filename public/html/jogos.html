@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogos de Matemática — Jogaê</title>
+  <script src="../js/require-auth.js"></script>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Catálogo de jogos matemáticos gamificados do Jogaê. Batalha Espacial, Corrida das Tabuadas e Pizza das Frações.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/nav.css">
+
+  <style>
+    .jogos-hero {
+      text-align: center;
+      padding: var(--space-xl) 0 var(--space-2xl);
+    }
+    .jogos-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background: #E0F7FF;
+      border: 1px solid #A5EAF5;
+      color: #075985;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+    }
+    .jogos-filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-2xl);
+    }
+    .filter-chip {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    .filter-chip:hover, .filter-chip.active {
+      background: #E0F7FF;
+      border-color: #06B6D4;
+      color: #075985;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+    }
+    .jogos-catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: var(--space-xl);
+    }
+    @media (max-width: 480px) {
+      .jogos-catalog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .game-card-hub {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-2xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-med);
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+    .game-card-hub:hover {
+      transform: translateY(-8px);
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 16px 45px rgba(56, 189, 248, 0.12), 0 0 25px rgba(244, 114, 182, 0.12);
+    }
+    .game-card-banner {
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner-pizza {
+      background: linear-gradient(135deg, #F3E8FF, #FCE7FF);
+      border-bottom: 1px solid rgba(147, 51, 234, 0.24);
+    }
+    .banner-espacial {
+      background: linear-gradient(135deg, #E0F7FF, #EDE9FE);
+      border-bottom: 1px solid rgba(22, 135, 248, 0.24);
+    }
+    .banner-tabuadas {
+      background: linear-gradient(135deg, #EDE9FE, #DBEAFE);
+      border-bottom: 1px solid rgba(124, 58, 237, 0.24);
+    }
+    .banner-locked {
+      background: linear-gradient(135deg, #F1F5F9, #E2E8F0);
+      border-bottom: 1px solid var(--border-color);
+      opacity: 0.75;
+    }
+    .game-card-content {
+      padding: var(--space-xl);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .game-topics-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-md) 0 var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .game-topics-list li {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body data-page="jogos">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="../../assets/img/logo.png" alt="Jogaê Logo" class="nav-logo-img">
+      </a>
+
+      <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Menu">
+        <i class="ph-bold ph-list"></i>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="dashboard.html" class="nav-link"><i class="ph-bold ph-house"></i> Início</a>
+        <a href="jogos.html" class="nav-link active"><i class="ph-bold ph-game-controller"></i> Jogos</a>
+        <a href="ranking.html" class="nav-link"><i class="ph-bold ph-trophy"></i> Ranking</a>
+        <a href="perfil.html" class="nav-link"><i class="ph-bold ph-user-circle"></i> Perfil</a>
+        <a href="professor.html" id="nav-prof-portal" class="nav-link" style="display: none; color: var(--color-accent-dark); background: rgba(147, 51, 234, 0.1); border: 1px solid rgba(147, 51, 234, 0.24);">
+          <i class="ph-bold ph-chalkboard-teacher"></i> Portal do Professor
+        </a>
+        <button id="btn-logout" class="btn btn-outline btn-sm" style="margin-left: 8px;">
+          <i class="ph-bold ph-sign-out"></i> Sair
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN GAMES HUB -->
+  <main class="container page-content">
+    
+    <!-- HERO HEADER -->
+    <header class="jogos-hero">
+      <div class="jogos-badge">
+        <i class="ph-bold ph-sparkle"></i> Catálogo Completo • Ensino Fundamental II
+      </div>
+      <h1 class="text-3xl font-bold">Jogos de Matemática</h1>
+      <p class="text-secondary" style="max-width: 680px; margin: 10px auto 0;">
+        Aprenda conceitos matemáticos na prática através de experiências interativas, fatiando pizzas, pilotando naves espaciais e acelerando nas tabuadas.
+      </p>
+    </header>
+
+    <!-- FILTROS POR CATEGORIA -->
+    <div class="jogos-filters">
+      <button type="button" class="filter-chip active" data-filter="all">
+        <i class="ph-bold ph-squares-four"></i> Todos os Jogos
+      </button>
+      <button type="button" class="filter-chip" data-filter="fracoes">
+        <i class="ph-bold ph-pizza"></i> Frações & Proporções
+      </button>
+      <button type="button" class="filter-chip" data-filter="inteiros">
+        <i class="ph-bold ph-planet"></i> Números Inteiros (+ e -)
+      </button>
+      <button type="button" class="filter-chip" data-filter="tabuadas">
+        <i class="ph-bold ph-x"></i> Multiplicação
+      </button>
+    </div>
+
+    <!-- GRID DE JOGOS -->
+    <section class="jogos-catalog-grid" id="jogos-grid">
+      
+      <!-- CARD 1: PIZZA DAS FRAÇÕES (NOVO!) -->
+      <article class="game-card-hub" data-category="fracoes">
+        <div class="game-card-banner banner-pizza">
+          <i class="ph-bold ph-pizza" style="font-size: 4.5rem; color: #FBBF24; filter: drop-shadow(0 6px 15px rgba(245,158,11,0.6));"></i>
+          <span class="font-orbitron text-lg font-bold text-gradient" style="margin-top: 6px; color: #FCD34D;">PIZZA DAS FRAÇÕES</span>
+          <span class="badge badge-accent" style="position: absolute; top: 12px; right: 12px; font-size: 0.68rem;">NOVO! 🔥</span>
+        </div>
+
+        <div class="game-card-content">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="badge badge-warning">6º & 7º Ano</span>
+              <span class="text-xs text-muted font-bold">Fácil • Médio • Difícil</span>
+            </div>
+            <h3 class="text-xl font-bold">Pizza das Frações</h3>
+            <p class="text-secondary text-sm" style="margin-top: 6px;">
+              Assuma o papel de Mestre Pizzaiolo! Fatie, monte e sirva pedidos de pizza calculando frações, partes de um todo e equivalências visuais.
+            </p>
+
+            <ul class="game-topics-list">
+              <li><i class="ph-bold ph-check-circle text-success"></i> Fatiamento visual interativo de pizza</li>
+              <li><i class="ph-bold ph-check-circle text-success"></i> Frações equivalentes e simplificação</li>
+              <li><i class="ph-bold ph-check-circle text-success"></i> Dicas didáticas com numerador e denominador</li>
+            </ul>
+          </div>
+
+          <a href="jogo3.html" class="btn btn-primary btn-block" style="background: linear-gradient(135deg, #1687F8, #9333EA 60%, #D946EF); box-shadow: 0 4px 20px rgba(147,51,234,0.25);">
+            <i class="ph-bold ph-play"></i> Jogar Pizza das Frações
+          </a>
+        </div>
+      </article>
+
+      <!-- CARD 2: BATALHA ESPACIAL -->
+      <article class="game-card-hub" data-category="inteiros">
+        <div class="game-card-banner banner-espacial">
+          <i class="ph-bold ph-planet" style="font-size: 4.5rem; color: #C084FC; filter: drop-shadow(0 6px 15px rgba(124,58,237,0.6));"></i>
+          <span class="font-orbitron text-lg font-bold text-gradient" style="margin-top: 6px;">BATALHA ESPACIAL</span>
+          <span class="badge badge-purple" style="position: absolute; top: 12px; right: 12px; font-size: 0.68rem;">POPULAR 🚀</span>
+        </div>
+
+        <div class="game-card-content">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="badge badge-purple">7º & 8º Ano</span>
+              <span class="text-xs text-muted font-bold">Fácil • Médio • Difícil</span>
+            </div>
+            <h3 class="text-xl font-bold">Batalha Espacial das Operações</h3>
+            <p class="text-secondary text-sm" style="margin-top: 6px;">
+              Pilote sua nave estelar pelo cosmos enfrentando asteroides através de cálculos de números inteiros positivos e negativos.
+            </p>
+
+            <ul class="game-topics-list">
+              <li><i class="ph-bold ph-check-circle text-success"></i> Operações com números inteiros (+ e -)</li>
+              <li><i class="ph-bold ph-check-circle text-success"></i> Sistema de 3 vidas, escudos e energia</li>
+              <li><i class="ph-bold ph-check-circle text-success"></i> Reta numérica e feedback didático em tempo real</li>
+            </ul>
+          </div>
+
+          <a href="jogo1.html" class="btn btn-primary btn-block">
+            <i class="ph-bold ph-play"></i> Jogar Batalha Espacial
+          </a>
+        </div>
+      </article>
+
+      <!-- CARD 3: CORRIDA DAS TABUADAS -->
+      <article class="game-card-hub" data-category="tabuadas">
+        <div class="game-card-banner banner-tabuadas">
+          <i class="ph-bold ph-car-simple" style="font-size: 4.5rem; color: #7C3AED; filter: drop-shadow(0 6px 15px rgba(124,58,237,0.35));"></i>
+          <span class="font-orbitron text-lg font-bold" style="color: #6D28D9; margin-top: 6px;">CORRIDA DAS TABUADAS</span>
+        </div>
+
+        <div class="game-card-content">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="badge badge-purple">6º ao 9º Ano</span>
+              <span class="text-xs text-muted font-bold">Fácil • Médio • Difícil</span>
+            </div>
+            <h3 class="text-xl font-bold">Corrida das Tabuadas</h3>
+            <p class="text-secondary text-sm" style="margin-top: 6px;">
+              Resolva multiplicações para acelerar seu carrinho. Pratique as tabuadas em uma corrida divertida até a linha de chegada.
+            </p>
+
+            <ul class="game-topics-list">
+              <li><i class="ph-bold ph-check-circle text-success"></i> Multiplicações com dificuldade progressiva</li>
+              <li><i class="ph-bold ph-check-circle text-success"></i> Avance na pista a cada resposta correta</li>
+              <li><i class="ph-bold ph-check-circle text-success"></i> Dicas para praticar cálculo mental</li>
+            </ul>
+          </div>
+
+          <a href="jogo2.html" class="btn btn-accent btn-block">
+            <i class="ph-bold ph-play"></i> Jogar Corrida das Tabuadas
+          </a>
+        </div>
+      </article>
+
+      <!-- CARD 4: EM BREVE - GEOMETRIA -->
+      <article class="game-card-hub" data-category="geometria" style="opacity: 0.75;">
+        <div class="game-card-banner banner-locked">
+          <i class="ph-bold ph-compass" style="font-size: 4rem; color: var(--text-muted);"></i>
+          <span class="font-orbitron text-base font-bold text-muted" style="margin-top: 6px;">ARENA DOS ÂNGULOS</span>
+          <span class="badge" style="position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.1); color: var(--text-secondary);">EM BREVE</span>
+        </div>
+
+        <div class="game-card-content">
+          <div>
+            <span class="badge" style="background: rgba(255,255,255,0.08); color: var(--text-secondary); margin-bottom: 8px;">6º ao 9º Ano</span>
+            <h3 class="text-xl font-bold text-muted">Geometria & Formas</h3>
+            <p class="text-secondary text-sm" style="margin-top: 6px;">
+              Desafios para calcular perímetros, áreas e propriedades dos polígonos.
+            </p>
+          </div>
+
+          <button class="btn btn-outline btn-block" disabled style="opacity: 0.5; margin-top: var(--space-md); cursor: not-allowed;">
+            <i class="ph-bold ph-lock"></i> Em Desenvolvimento
+          </button>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const u = getUsuarioLocal();
+      if (!u) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Se for professor, exibe o link do portal
+      if (u.perfil === 'professor') {
+        const portalBtn = document.getElementById('nav-prof-portal');
+        if (portalBtn) portalBtn.style.display = 'inline-flex';
+      }
+
+      // Hamburger menu toggle
+      document.getElementById('nav-toggle')?.addEventListener('click', () => {
+        document.getElementById('nav-links')?.classList.toggle('open');
+      });
+
+      // Logout
+      document.getElementById('btn-logout')?.addEventListener('click', async () => {
+        await api.post('/auth/logout.php');
+        limparUsuarioLocal();
+        window.location.href = 'login.html';
+      });
+
+      // Filtros rápidos de categoria
+      const filterChips = document.querySelectorAll('.filter-chip');
+      const gameCards = document.querySelectorAll('.game-card-hub');
+
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          filterChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const filter = chip.dataset.filter;
+
+          gameCards.forEach(card => {
+            if (filter === 'all' || card.dataset.category === filter) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

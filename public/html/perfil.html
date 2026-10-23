@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Usuário — Jogaê</title>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Gerencie seu perfil, avatar e dados na plataforma Jogaê.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../css/global.css?v=2">
+  <link rel="stylesheet" href="../css/components.css?v=2">
+  <link rel="stylesheet" href="../css/nav.css?v=2">
+  <link rel="stylesheet" href="../css/profile.css?v=2">
+</head>
+<body data-page="perfil">
+
+  <!-- NAVBAR -->
+  <nav class="navbar profile-navbar">
+    <div class="nav-container">
+      <a href="dashboard.html" class="nav-brand" aria-label="Jogaê — Início">
+        <img src="../../assets/img/logo.png" alt="Jogaê Logo" class="nav-logo-img">
+      </a>
+
+      <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Menu">
+        <i class="ph-bold ph-list"></i>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="dashboard.html" class="nav-link"><i class="ph-bold ph-house"></i> Início</a>
+        <a href="jogos.html" class="nav-link"><i class="ph-bold ph-game-controller"></i> Jogos</a>
+        <a href="videoaulas.html" class="nav-link"><i class="ph-bold ph-youtube-logo"></i> Videoaulas</a>
+        <a href="ranking.html" class="nav-link"><i class="ph-bold ph-trophy"></i> Ranking</a>
+        <a href="perfil.html" class="nav-link active"><i class="ph-bold ph-user-circle"></i> Perfil</a>
+        <a href="professor.html" id="nav-prof-portal" class="nav-link" style="display: none;">
+          <i class="ph-bold ph-chalkboard-teacher"></i> Portal do Professor
+        </a>
+        <button id="btn-logout" class="btn btn-outline btn-sm" style="margin-left: 8px;">
+          <i class="ph-bold ph-sign-out"></i> Sair
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PROFILE CONTENT -->
+  <main class="container page-content profile-page">
+
+    <!-- PAGE HEADING -->
+    <header class="profile-heading">
+      <div class="profile-heading-copy">
+        <span class="profile-kicker"><i class="ph-bold ph-user-circle" aria-hidden="true"></i> Minha conta</span>
+        <h1>Seu perfil</h1>
+        <p>Gerencie suas informações e personalize sua experiência no Jogaê.</p>
+      </div>
+      <a href="dashboard.html" class="btn btn-outline btn-sm" style="flex-shrink: 0;">
+        <i class="ph-bold ph-arrow-left"></i> Voltar ao painel
+      </a>
+    </header>
+
+    <div class="profile-layout">
+
+      <!-- SUMMARY CARD (LEFT) -->
+      <section class="profile-summary" aria-label="Resumo da conta">
+        <!-- Cover banner -->
+        <div class="profile-summary-cover" aria-hidden="true">
+          <div class="profile-summary-cover-circles"></div>
+        </div>
+
+        <div class="profile-summary-content">
+          <div class="profile-summary-top">
+            <div id="profile-avatar" class="profile-avatar" aria-label="Avatar do perfil">🚀</div>
+            <span class="profile-account-badge" id="profile-tipo">Aluno(a)</span>
+          </div>
+
+          <div class="profile-identity">
+            <h2 id="profile-name">Carregando...</h2>
+            <p id="profile-email">carregando@jogaae.com</p>
+            <div class="profile-level">
+              <i class="ph-bold ph-medal" aria-hidden="true"></i>
+              <span id="profile-nivel">Nível 1 • Aprendiz</span>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="profile-stats" aria-label="Estatísticas da conta">
+            <div class="profile-stat">
+              <span class="profile-stat-label"><i class="ph-bold ph-lightning" aria-hidden="true"></i> Pontos XP</span>
+              <strong class="profile-stat-value" id="profile-xp">0</strong>
+            </div>
+            <div class="profile-stat">
+              <span class="profile-stat-label"><i class="ph-bold ph-game-controller" aria-hidden="true"></i> Partidas</span>
+              <strong class="profile-stat-value" id="profile-partidas">0</strong>
+            </div>
+          </div>
+
+          <!-- Theme setting -->
+          <div class="profile-theme-setting">
+            <div>
+              <h3>Aparência</h3>
+              <p>Escolha o tema que prefere usar.</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" data-theme-toggle aria-pressed="false">
+              Tema escuro
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDITOR CARD (RIGHT) -->
+      <section class="profile-editor" aria-labelledby="profile-editor-title">
+        <div class="profile-editor-header">
+          <div class="profile-editor-icon"><i class="ph-bold ph-identification-card" aria-hidden="true"></i></div>
+          <div>
+            <h2 id="profile-editor-title">Informações pessoais</h2>
+            <p>Atualize como sua conta aparece na plataforma.</p>
+          </div>
+        </div>
+
+        <form id="form-perfil">
+          <!-- Nome -->
+          <div class="form-group">
+            <label for="perfil-nome" class="form-label">Nome completo</label>
+            <input type="text" id="perfil-nome" class="form-control" placeholder="Seu nome" autocomplete="name" required>
+          </div>
+
+          <!-- E-mail -->
+          <div class="form-group">
+            <label for="perfil-email" class="form-label">E-mail</label>
+            <input type="email" id="perfil-email" class="form-control" placeholder="seu@email.com" disabled>
+            <span class="text-xs text-muted profile-email-note">
+              <i class="ph-bold ph-lock-key" aria-hidden="true"></i> O e-mail de cadastro não pode ser alterado.
+            </span>
+          </div>
+
+          <div class="profile-section-divider"></div>
+
+          <!-- Avatar -->
+          <div class="form-group">
+            <span class="form-label" id="avatar-label">Escolha seu avatar</span>
+            <div id="avatar-selector" class="profile-avatar-selector" role="group" aria-labelledby="avatar-label"></div>
+          </div>
+
+          <div class="profile-section-divider"></div>
+
+          <!-- Foto de perfil -->
+          <div class="form-group">
+            <label class="form-label">Foto de perfil</label>
+
+            <!-- Upload area -->
+            <label for="perfil-foto" class="profile-photo-upload-area" aria-label="Área para upload de foto de perfil">
+              <i class="ph-bold ph-image-square profile-photo-upload-icon" aria-hidden="true"></i>
+              <p><strong>Clique para enviar</strong> ou arraste a imagem aqui</p>
+              <p style="font-size: 0.75rem; opacity: 0.7;">PNG, JPG, WEBP ou GIF — até 1 MB</p>
+              <input type="file" id="perfil-foto" style="display: none;" accept="image/png,image/jpeg,image/webp,image/gif">
+            </label>
+
+            <div class="profile-photo-controls">
+              <button type="button" id="salvar-foto-perfil" class="btn btn-outline btn-sm">
+                <i class="ph-bold ph-image" aria-hidden="true"></i> Salvar foto
+              </button>
+              <button type="button" id="remover-foto-perfil" class="btn btn-outline btn-sm">
+                <i class="ph-bold ph-trash" aria-hidden="true"></i> Remover foto
+              </button>
+            </div>
+          </div>
+
+          <!-- Save button -->
+          <div class="profile-save">
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="ph-bold ph-floppy-disk" aria-hidden="true"></i> Salvar alterações
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const u = getUsuarioLocal();
+      if (!u) {
+        window.location.href = 'login.html';
+        return;
+      }
+      if (u.perfil === 'professor') {
+        document.getElementById('nav-prof-portal').style.display = 'inline-flex';
+      }
+
+      // Logout listener
+      document.getElementById('btn-logout')?.addEventListener('click', async () => {
+        await api.post('/auth/logout.php');
+        limparUsuarioLocal();
+        window.location.href = 'login.html';
+      });
+
+      let avatarSelecionado = u.avatar || 1;
+      let usuarioPerfil = u;
+      let fotoSelecionada = null;
+      let fotoPreviewUrl = null;
+      const avatarPreview = document.getElementById('profile-avatar');
+
+      renderUserAvatar(avatarPreview, usuarioPerfil, getAvatar(avatarSelecionado));
+      fotoSelecionada = getProfilePhoto(usuarioPerfil.id);
+      document.getElementById('profile-name').textContent = usuarioPerfil.nome || 'Seu perfil';
+      document.getElementById('profile-email').textContent = usuarioPerfil.email || '';
+      document.getElementById('profile-tipo').textContent = usuarioPerfil.perfil === 'professor' ? 'Professor(a)' : 'Aluno(a)';
+      document.getElementById('profile-nivel').textContent = `Nível ${usuarioPerfil.nivel_atual || 1}`;
+      document.getElementById('profile-xp').textContent = formatScore(usuarioPerfil.xp_total || 0);
+      document.getElementById('profile-partidas').textContent = formatScore(usuarioPerfil.partidas_jogadas || 0);
+      document.getElementById('perfil-nome').value = usuarioPerfil.nome || '';
+      document.getElementById('perfil-email').value = usuarioPerfil.email || '';
+
+      // Carrega dados do perfil via backend
+      try {
+        const data = await api.get('/usuario/perfil.php');
+        if (data?.usuario) {
+          const user = data.usuario;
+          const stats = data.stats || {};
+          usuarioPerfil = user;
+          document.getElementById('profile-name').textContent = user.nome;
+          document.getElementById('profile-email').textContent = user.email;
+          renderUserAvatar(avatarPreview, user, getAvatar(user.avatar || 1));
+          document.getElementById('profile-tipo').textContent = user.perfil === 'professor' ? 'Professor(a)' : 'Aluno(a)';
+          document.getElementById('profile-nivel').textContent = `Nível ${user.nivel_atual || 1}`;
+          document.getElementById('profile-xp').textContent = formatScore(user.xp_total || 0);
+          document.getElementById('profile-partidas').textContent = formatScore(stats.total_partidas || 0);
+          
+          document.getElementById('perfil-nome').value = user.nome;
+          document.getElementById('perfil-email').value = user.email;
+          avatarSelecionado = user.avatar || 1;
+          fotoSelecionada = getProfilePhoto(user.id);
+        }
+      } catch (err) {
+        console.warn('Erro ao carregar perfil:', err.message);
+      }
+
+      // Renderiza seletor de avatares
+      const avatares = ['🚀', '👾', '🤖', '🧙', '🦊', '🐱'];
+      const selectorEl = document.getElementById('avatar-selector');
+      selectorEl.innerHTML = avatares.map((av, index) => {
+        const id = index + 1;
+        return `
+          <button type="button" class="avatar-option" data-id="${id}" aria-label="Selecionar avatar ${av}" aria-pressed="${id === Number(avatarSelecionado)}">
+            ${av}
+          </button>
+        `;
+      }).join('');
+
+      selectorEl.querySelectorAll('.avatar-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          selectorEl.querySelectorAll('.avatar-option').forEach(o => {
+            o.setAttribute('aria-pressed', 'false');
+          });
+          opt.setAttribute('aria-pressed', 'true');
+          avatarSelecionado = Number(opt.dataset.id);
+          renderUserAvatar(avatarPreview, usuarioPerfil, getAvatar(avatarSelecionado));
+        });
+      });
+
+      const photoInput = document.getElementById('perfil-foto');
+      photoInput.addEventListener('change', () => {
+        const file = photoInput.files?.[0];
+        if (!file) return;
+
+        const allowedTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
+        if (!allowedTypes.includes(file.type) || file.size > 1024 * 1024) {
+          photoInput.value = '';
+          showToast('Escolha uma imagem PNG, JPG, WEBP ou GIF de até 1 MB.', 'error');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+          if (typeof reader.result !== 'string') {
+            showToast('Não foi possível carregar essa imagem.', 'error');
+            return;
+          }
+          fotoSelecionada = reader.result;
+          renderUserAvatar(avatarPreview, usuarioPerfil, getAvatar(avatarSelecionado));
+          if (fotoPreviewUrl) URL.revokeObjectURL(fotoPreviewUrl);
+          fotoPreviewUrl = URL.createObjectURL(file);
+          avatarPreview.replaceChildren();
+          const image = document.createElement('img');
+          image.src = fotoPreviewUrl;
+          image.alt = 'Prévia da foto de perfil';
+          image.className = 'user-profile-photo';
+          avatarPreview.append(image);
+        });
+        reader.addEventListener('error', () => {
+          showToast('Não foi possível ler o arquivo de imagem.', 'error');
+        }, { once: true });
+        reader.readAsDataURL(file);
+      });
+
+      document.getElementById('salvar-foto-perfil').addEventListener('click', () => {
+        if (!fotoSelecionada) {
+          showToast('Escolha uma imagem antes de salvar.', 'warning');
+          return;
+        }
+        try {
+          setProfilePhoto(usuarioPerfil.id, fotoSelecionada);
+          if (fotoPreviewUrl) {
+            URL.revokeObjectURL(fotoPreviewUrl);
+            fotoPreviewUrl = null;
+          }
+          renderUserAvatar(avatarPreview, usuarioPerfil, getAvatar(avatarSelecionado));
+          showToast('Foto de perfil salva neste navegador!', 'success');
+        } catch (err) {
+          showToast(err.message, 'error');
+        }
+      });
+
+      document.getElementById('remover-foto-perfil').addEventListener('click', () => {
+        removeProfilePhoto(usuarioPerfil.id);
+        fotoSelecionada = null;
+        photoInput.value = '';
+        if (fotoPreviewUrl) {
+          URL.revokeObjectURL(fotoPreviewUrl);
+          fotoPreviewUrl = null;
+        }
+        renderUserAvatar(avatarPreview, usuarioPerfil, getAvatar(avatarSelecionado));
+        showToast('Foto de perfil removida.', 'success');
+      });
+
+      // Submit do formulário de atualização do perfil
+      document.getElementById('form-perfil').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const novoNome = document.getElementById('perfil-nome').value.trim();
+        if (!novoNome) return;
+
+        try {
+          const res = await api.post('/usuario/perfil.php', {
+            nome: novoNome,
+            avatar: avatarSelecionado
+          });
+
+          if (res) {
+            showToast('Perfil atualizado com sucesso! ✅', 'success');
+            const localU = getUsuarioLocal();
+            if (localU) {
+              localU.nome = novoNome;
+              localU.avatar = avatarSelecionado;
+              setUsuarioLocal(localU);
+            }
+            usuarioPerfil = { ...usuarioPerfil, nome: novoNome, avatar: avatarSelecionado };
+            document.getElementById('profile-name').textContent = novoNome;
+            renderUserAvatar(avatarPreview, usuarioPerfil, getAvatar(avatarSelecionado));
+          }
+        } catch (err) {
+          showToast('Erro ao atualizar: ' + err.message, 'error');
+        }
+      });
+    });
+
+    // Hamburger menu toggle
+    document.getElementById('nav-toggle')?.addEventListener('click', () => {
+      document.getElementById('nav-links')?.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

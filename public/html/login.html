@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Jogaê</title>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Faça login na plataforma Jogaê e continue sua jornada de aprendizado em matemática.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body data-page="login">
+
+  <main class="auth-page">
+    <div class="auth-container">
+      
+      <!-- LADO ESQUERDO / BRANDING COM MASCOTE -->
+      <div class="auth-branding">
+        <div>
+          <a href="index.html" style="display: inline-block;">
+            <img src="../../assets/img/logo.png" alt="Jogaê Logo" class="auth-branding-logo-img">
+          </a>
+          <h2 class="auth-branding__title mt-md">Bem-vindo de volta! 🚀</h2>
+          <p class="auth-branding__tagline">
+            Sua jornada em Matemática continua aqui. Acesse para disputar partidas, evoluir de nível e conferir tarefas das turmas.
+          </p>
+        </div>
+
+        <div class="auth-branding__features">
+          <div class="auth-feature-item">
+            <i class="ph-bold ph-game-controller"></i>
+            <span>Desafios Interativos de Matemática</span>
+          </div>
+          <div class="auth-feature-item">
+            <i class="ph-bold ph-chalkboard-teacher"></i>
+            <span>Painéis para Alunos e Professores</span>
+          </div>
+          <div class="auth-feature-item">
+            <i class="ph-bold ph-trophy"></i>
+            <span>Ranking Global & Desempenho</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LADO DIREITO / FORMULÁRIO DE LOGIN -->
+      <div class="auth-form-panel">
+        <div class="auth-form-header">
+          <h1>Acessar Conta</h1>
+          <p>Escolha seu perfil e entre na plataforma</p>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <div id="login-error" class="form-error"></div>
+
+          <div class="auth-form-group">
+            <label>Entrar como</label>
+            <div class="perfil-role-grid" role="radiogroup" aria-label="Escolha seu perfil">
+              <label class="perfil-role-card selected" id="login-role-aluno" for="login-perfil-aluno">
+                <input type="radio" name="perfil" value="aluno" id="login-perfil-aluno" checked>
+                <span class="perfil-role-info">
+                  <span class="title"><i class="ph-bold ph-student"></i> Aluno</span>
+                  <span class="subtitle">Jogar e aprender</span>
+                </span>
+              </label>
+              <label class="perfil-role-card" id="login-role-professor" for="login-perfil-professor">
+                <input type="radio" name="perfil" value="professor" id="login-perfil-professor">
+                <span class="perfil-role-info">
+                  <span class="title"><i class="ph-bold ph-chalkboard-teacher"></i> Professor</span>
+                  <span class="subtitle">Gerenciar turmas</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="email">E-mail</label>
+            <div class="auth-input-wrapper">
+              <i class="ph-bold ph-envelope"></i>
+              <input type="email" id="email" name="email" placeholder="seu.email@escola.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="senha">Senha</label>
+            <div class="auth-input-wrapper">
+              <i class="ph-bold ph-lock-key"></i>
+              <input type="password" id="senha" name="senha" placeholder="••••••••" required autocomplete="current-password">
+            </div>
+          </div>
+
+          <div style="margin-top: var(--space-md);">
+            <button type="submit" id="btn-login" class="btn btn-primary btn-lg" style="width: 100%;">
+              Entrar na Plataforma <i class="ph-bold ph-sign-in"></i>
+            </button>
+          </div>
+
+          <div class="auth-form-footer">
+            <a href="#" style="font-size: 0.82rem; color: var(--text-secondary); display: block; margin-bottom: 8px;">Esqueceu sua senha?</a>
+            Ainda não tem conta? <a href="cadastro.html">Criar conta grátis</a>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+</body>
+</html>

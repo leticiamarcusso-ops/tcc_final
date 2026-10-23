@@ -1,0 +1,1245 @@
+/* ============================================================
+   JOGAÊ — dashboard.css (Design System Organizado, Arejado & Moderno)
+   ============================================================ */
+
+/* ─── Layout da Página ────────────────────────────────────────── */
+.dashboard-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(24px, 3.5vw, 44px) clamp(20px, 3vw, 40px) 80px;
+}
+
+/* ─── Separações e Ritmo Visual Entre Seções ──────────────────── */
+.dash-section {
+  margin-bottom: clamp(40px, 5vw, 56px);
+}
+
+.dash-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.dash-section-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dash-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+}
+
+.dash-heading {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-heading i {
+  font-size: 1.55rem;
+}
+
+.dash-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+}
+
+.dash-link:hover {
+  color: var(--color-primary-dark);
+  background: rgba(22, 135, 248, 0.08);
+  gap: 11px;
+}
+
+/* ─── Hero Principal (Espaçoso, Elegante & Confortável) ───────── */
+.dash-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  align-items: center;
+  gap: clamp(32px, 4.5vw, 56px);
+  padding: clamp(36px, 5vw, 54px);
+  border-radius: 32px;
+  margin-bottom: clamp(44px, 5.5vw, 60px);
+  overflow: hidden;
+  color: #FFFFFF;
+  background:
+    radial-gradient(ellipse at 10% 85%, rgba(6, 182, 212, 0.28) 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 15%, rgba(147, 51, 234, 0.38) 0%, transparent 46%),
+    radial-gradient(ellipse at 95% 85%, rgba(217, 70, 239, 0.25) 0%, transparent 42%),
+    linear-gradient(135deg, #090F24 0%, #12163E 45%, #240E48 100%);
+  box-shadow: 0 28px 70px rgba(8, 12, 38, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Textura sutil */
+.dash-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Anéis de brilho cósmico */
+.dash-hero::after {
+  content: "";
+  position: absolute;
+  right: -90px;
+  bottom: -180px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 0 90px rgba(147, 51, 234, 0.18);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dash-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Hero: Lado Esquerdo ─────────────────────────────────────── */
+.dash-hero-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #A5F3FC;
+  width: fit-content;
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.dash-identity {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 18px;
+}
+
+.dash-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.dash-avatar {
+  width: 82px;
+  height: 82px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.13);
+  border: 2.5px solid rgba(255, 255, 255, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32), 0 0 24px rgba(6, 182, 212, 0.35);
+  backdrop-filter: blur(14px);
+  transition: transform 0.3s ease;
+}
+
+.dash-avatar:hover {
+  transform: scale(1.06) rotate(3deg);
+}
+
+.dash-status-dot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #22C55E;
+  border: 3px solid #0F172A;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
+}
+
+.dash-user-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.dash-tag-level {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #EDE9FE;
+  backdrop-filter: blur(6px);
+}
+
+.dash-tag-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(147, 51, 234, 0.35);
+  border: 1px solid rgba(192, 132, 252, 0.5);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #F3E8FF;
+  backdrop-filter: blur(6px);
+}
+
+.dash-title {
+  font-size: clamp(2rem, 3.4vw, 2.9rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: #FFFFFF;
+  margin: 0;
+  text-shadow: 0 4px 22px rgba(0, 0, 0, 0.35);
+}
+
+.dash-subtitle {
+  font-size: 1.02rem;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 580px;
+  line-height: 1.65;
+  margin: 14px 0 28px;
+}
+
+.dash-cta-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.dash-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #06B6D4 0%, #1687F8 100%);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.94rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 26px rgba(6, 182, 212, 0.38);
+  transition: all 0.25s ease;
+}
+
+.dash-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(6, 182, 212, 0.52);
+  color: #FFFFFF;
+}
+
+.dash-btn-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.dash-btn-glass:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.42);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* ─── Hero: Lado Direito (Card Destaque) ───────────────────────── */
+.dash-featured-card {
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dash-featured-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(6, 182, 212, 0.55);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.36), 0 0 32px rgba(6, 182, 212, 0.22);
+}
+
+.dash-featured-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #A5F3FC;
+  margin-bottom: 14px;
+}
+
+.dash-featured-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px 0 18px;
+}
+
+.dash-featured-illustration {
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  border-radius: 26px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.28) 0%, rgba(147, 51, 234, 0.12) 70%);
+  font-size: 3.8rem;
+  color: #67E8F9;
+  filter: drop-shadow(0 10px 20px rgba(6, 182, 212, 0.45));
+  margin-bottom: 14px;
+  animation: dash-float 4s ease-in-out infinite;
+}
+
+@keyframes dash-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.dash-featured-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0 0 6px;
+}
+
+.dash-featured-desc {
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.dash-featured-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 13px 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.dash-featured-play:hover {
+  background: #FFFFFF;
+  color: #0F172A;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.38);
+  transform: translateY(-2px);
+}
+
+/* ─── Hero: Barra de Progresso de XP (Arejada) ────────────────── */
+.dash-xp-container {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 28px;
+  margin-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.dash-xp-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+}
+
+.dash-xp-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.dash-xp-counter {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: #FFFFFF;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+}
+
+.dash-xp-bar-bg {
+  width: 100%;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background: rgba(8, 12, 38, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 2.5px;
+  overflow: hidden;
+}
+
+.dash-xp-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  width: 0%;
+  background: linear-gradient(90deg, #06B6D4 0%, #8B5CF6 50%, #EC4899 100%);
+  box-shadow: 0 0 18px rgba(6, 182, 212, 0.65);
+  transition: width 1s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.dash-xp-footer-note {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.65);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ─── KPIs / Métricas (Cards Espaçosos & Descongestionados) ────── */
+.dash-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
+  margin-bottom: clamp(40px, 5vw, 56px);
+}
+
+.dash-kpi-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 22px;
+  border-radius: 24px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(70, 45, 110, 0.05);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.dash-kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--kpi-accent, var(--color-primary));
+  opacity: 0.85;
+}
+
+.dash-kpi-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-subtle);
+  box-shadow: 0 12px 32px rgba(70, 45, 110, 0.1);
+}
+
+.dash-kpi-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 1.65rem;
+  flex-shrink: 0;
+}
+
+.kpi-purple {
+  --kpi-accent: #9333EA;
+  background: rgba(147, 51, 234, 0.12);
+  color: #7E22CE;
+}
+
+.kpi-blue {
+  --kpi-accent: #1687F8;
+  background: rgba(22, 135, 248, 0.12);
+  color: #0756C9;
+}
+
+.kpi-emerald {
+  --kpi-accent: #16A34A;
+  background: rgba(22, 163, 74, 0.12);
+  color: #15803D;
+}
+
+.kpi-amber {
+  --kpi-accent: #EAB308;
+  background: rgba(234, 179, 8, 0.14);
+  color: #A16207;
+}
+
+.dash-kpi-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.dash-kpi-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.dash-kpi-label {
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+/* ─── Grid Principal de 2 Colunas (Espaço de Respiro Amplo) ──── */
+.dash-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: clamp(24px, 3.5vw, 36px);
+  align-items: start;
+}
+
+.dash-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 3.5vw, 36px);
+}
+
+/* ─── Painel Base (Card Arejado com Alto Contraste) ──────────── */
+.dash-card {
+  padding: clamp(26px, 3vw, 34px);
+  border-radius: 28px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(70, 45, 110, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dash-card:hover {
+  border-color: var(--border-subtle);
+  box-shadow: 0 10px 28px rgba(70, 45, 110, 0.09);
+}
+
+.dash-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dash-card-title {
+  margin: 0;
+  font-size: 1.22rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-card-title i {
+  font-size: 1.45rem;
+}
+
+.dash-card-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+/* ─── Jogos em Destaque (Cards Horizontais Bem Espaçados) ─────── */
+.dash-games-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dash-game-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 22px;
+  border-radius: 22px;
+  background: var(--bg-base);
+  border: 1px solid var(--border-color);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.dash-game-row:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-subtle);
+  box-shadow: 0 12px 28px rgba(70, 45, 110, 0.09);
+  background: var(--bg-elevated);
+}
+
+.dash-game-main {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.dash-game-icon-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 1.85rem;
+  flex-shrink: 0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.icon-space {
+  background: linear-gradient(135deg, #E0F7FF 0%, #BAF0FF 100%);
+  color: #0369A1;
+}
+
+.icon-race {
+  background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%);
+  color: #6B21A8;
+}
+
+.icon-pizza {
+  background: linear-gradient(135deg, #FCE7FF 0%, #F5D0FE 100%);
+  color: #A21CAF;
+}
+
+.dash-game-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.dash-game-meta-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dash-game-name {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dash-game-topic {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-pill-new {
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  background: #D946EF;
+  color: #FFFFFF;
+}
+
+.dash-game-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+/* ─── Conquistas / Troféus (Grade Aberta & Nítida) ─────────────── */
+.dash-achieve-progress-pill {
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.74rem;
+  font-weight: 800;
+  background: rgba(147, 51, 234, 0.1);
+  color: var(--color-accent-dark);
+  border: 1px solid rgba(147, 51, 234, 0.22);
+}
+
+.dash-achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.dash-achieve-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-base);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dash-achieve-item.unlocked {
+  background: linear-gradient(180deg, rgba(147, 51, 234, 0.08) 0%, rgba(147, 51, 234, 0.02) 100%);
+  border-color: rgba(147, 51, 234, 0.35);
+  box-shadow: 0 4px 16px rgba(147, 51, 234, 0.08);
+}
+
+.dash-achieve-item.locked {
+  opacity: 0.65;
+  filter: grayscale(0.5);
+}
+
+.dash-achieve-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-subtle);
+}
+
+.dash-achieve-icon {
+  font-size: 2.4rem;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.dash-achieve-name {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.dash-achieve-desc {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.dash-achieve-badge {
+  margin-top: 10px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+}
+
+.dash-achieve-badge.unlocked {
+  background: rgba(34, 197, 94, 0.15);
+  color: #15803D;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.dash-achieve-badge.locked {
+  background: rgba(100, 116, 139, 0.12);
+  color: #64748B;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+/* ─── Card de Turma Escolar (Integrado à Coluna Lateral) ───────── */
+.dash-turma-card-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.dash-turma-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 1.45rem;
+  background: rgba(22, 135, 248, 0.1);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.dash-turma-card-text p {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.dash-turma-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 14px;
+  background: rgba(147, 51, 234, 0.1);
+  border: 1px solid rgba(147, 51, 234, 0.25);
+  color: var(--color-accent-dark);
+  font-weight: 800;
+  font-size: 0.84rem;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.dash-classroom-empty-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.45;
+}
+
+.dash-classroom-form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.dash-classroom-form-row .form-control {
+  min-width: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 14px;
+  padding: 11px 16px;
+}
+
+/* ─── Missões Atribuídas pelo Professor ───────────────────────── */
+.dash-missions-container {
+  padding: 26px;
+  border-radius: 26px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(70, 45, 110, 0.05);
+  margin-bottom: 28px;
+}
+
+.dash-missions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.dash-mission-card {
+  padding: 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.06) 0%, rgba(255, 107, 53, 0.02) 100%);
+  border: 1px solid rgba(255, 107, 53, 0.28);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dash-mission-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.12);
+}
+
+/* ─── Histórico Recente de Partidas (Linhas Agradáveis) ────────── */
+.dash-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dash-history-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 18px;
+  border-radius: 18px;
+  background: var(--bg-base);
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.dash-history-row:hover {
+  transform: translateX(3px);
+  background: var(--bg-elevated);
+  border-color: var(--border-subtle);
+}
+
+.dash-history-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.dash-history-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.dash-history-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.dash-history-game-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.dash-history-stats-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+}
+
+.dash-history-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.dash-history-xp {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+.dash-history-date {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.dash-empty-state {
+  text-align: center;
+  padding: 42px 20px;
+  color: var(--text-secondary);
+}
+
+.dash-empty-state i {
+  font-size: 3.2rem;
+  opacity: 0.35;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.dash-empty-state p {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ─── Atalhos Rápidos ─────────────────────────────────────────── */
+.dash-quick-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.dash-quick-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: var(--bg-base);
+  border: 1px solid var(--border-color);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.dash-quick-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-subtle);
+  background: var(--bg-elevated);
+  box-shadow: 0 6px 18px rgba(70, 45, 110, 0.07);
+}
+
+.dash-quick-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.dash-quick-card strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+.dash-quick-card span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ─── Skeletons Elegantes ─────────────────────────────────────── */
+.dash-skeleton {
+  background: linear-gradient(90deg, rgba(147, 51, 234, 0.05) 25%, rgba(147, 51, 234, 0.12) 50%, rgba(147, 51, 234, 0.05) 75%);
+  background-size: 200% 100%;
+  animation: dash-skeleton-pulse 1.6s ease-in-out infinite;
+  border-radius: 16px;
+}
+
+@keyframes dash-skeleton-pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── DARK THEME OVERRIDES ────────────────────────────────────── */
+html[data-theme="dark"] .dash-hero {
+  background:
+    radial-gradient(ellipse at 10% 85%, rgba(6, 182, 212, 0.22) 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 15%, rgba(147, 51, 234, 0.3) 0%, transparent 46%),
+    radial-gradient(ellipse at 95% 85%, rgba(217, 70, 239, 0.2) 0%, transparent 42%),
+    linear-gradient(135deg, #070B19 0%, #0D102E 45%, #180936 100%);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+html[data-theme="dark"] .dash-kpi-card,
+html[data-theme="dark"] .dash-missions-container,
+html[data-theme="dark"] .dash-card {
+  background: var(--bg-surface);
+  border-color: var(--border-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+html[data-theme="dark"] .dash-game-row,
+html[data-theme="dark"] .dash-history-row,
+html[data-theme="dark"] .dash-achieve-item,
+html[data-theme="dark"] .dash-quick-card {
+  background: var(--bg-elevated);
+  border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .dash-game-row:hover,
+html[data-theme="dark"] .dash-history-row:hover,
+html[data-theme="dark"] .dash-quick-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html[data-theme="dark"] .kpi-emerald {
+  color: #4ADE80;
+}
+
+html[data-theme="dark"] .kpi-amber {
+  color: #FACC15;
+}
+
+html[data-theme="dark"] .dash-history-xp {
+  color: #38BDF8;
+}
+
+/* ─── RESPONSIVIDADE ─────────────────────────────────────────── */
+@media (max-width: 1120px) {
+  .dash-hero {
+    grid-template-columns: 1fr 310px;
+    gap: 32px;
+  }
+  .dash-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dash-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dash-hero {
+    grid-template-columns: 1fr;
+    border-radius: 24px;
+    padding: 28px 22px;
+  }
+
+  .dash-featured-card {
+    display: none;
+  }
+
+  .dash-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .dash-kpi-card {
+    padding: 18px 16px;
+    gap: 14px;
+  }
+
+  .dash-kpi-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 1.45rem;
+  }
+
+  .dash-kpi-value {
+    font-size: 1.35rem;
+  }
+
+  .dash-quick-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-page {
+    padding-top: 16px;
+  }
+
+  .dash-hero {
+    padding: 22px 18px;
+  }
+
+  .dash-avatar {
+    width: 64px;
+    height: 64px;
+    font-size: 2rem;
+    border-radius: 20px;
+  }
+
+  .dash-title {
+    font-size: 1.65rem;
+  }
+
+  .dash-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dash-btn-primary,
+  .dash-btn-glass {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .dash-kpi-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .dash-classroom-form-row {
+    flex-direction: column;
+  }
+
+  .dash-classroom-form-row .btn {
+    width: 100%;
+  }
+
+  .dash-game-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dash-game-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dash-featured-illustration,
+  .dash-skeleton,
+  .dash-xp-bar-fill,
+  .dash-kpi-card,
+  .dash-game-row,
+  .dash-history-row {
+    animation: none;
+    transition: none;
+  }
+  .dash-kpi-card:hover,
+  .dash-game-row:hover,
+  .dash-history-row:hover {
+    transform: none;
+  }
+}

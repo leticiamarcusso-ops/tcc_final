@@ -1,0 +1,446 @@
+/* ============================================================
+   JOGAAE — jogo3.css
+   Pizza das Frações — Pizzaria Matemática
+   Tema: Pizzaria Gourmet & Forno a Lenha Gamificado
+   ============================================================ */
+
+.pizza-theme {
+  background-color: #100D1B;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(217, 70, 239, 0.06) 0%, transparent 60%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* TOPBAR DO JOGO */
+.game-hud-topbar {
+  background: rgba(16, 13, 27, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.25);
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.5);
+}
+
+.hud-topbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* STATUS BAR (HUD) */
+.hud-status-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-xl);
+  margin-bottom: var(--space-xl);
+  background: rgba(27, 23, 40, 0.9);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 20px rgba(56, 189, 248, 0.1);
+  border-radius: var(--radius-xl);
+}
+
+.hud-stat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hud-stat-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.hud-stat-value {
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.text-pizza-gold {
+  color: #67E8F9;
+  text-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
+}
+
+.text-pizza-red {
+  color: #EF4444;
+}
+
+/* ARENA PRINCIPAL */
+.game-container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg) var(--space-2xl);
+}
+
+.pizza-arena {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .pizza-arena {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CONTAINER DA PIZZA */
+.pizza-board-card {
+  background: linear-gradient(145deg, #211A31, #171322);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.5), inset 0 0 40px rgba(0,0,0,0.6);
+}
+
+.wooden-board {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  max-width: 90vw;
+  max-height: 90vw;
+  background: radial-gradient(circle, #3D2314 0%, #27140B 70%, #170A04 100%);
+  border-radius: 50%;
+  border: 10px solid #5C381E;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.7), inset 0 0 20px rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--space-md) 0;
+  user-select: none;
+}
+
+.pizza-svg {
+  width: 300px;
+  height: 300px;
+  overflow: visible;
+  filter: drop-shadow(0 8px 25px rgba(0,0,0,0.6));
+}
+
+/* Fatias interativas */
+.pizza-slice {
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease, stroke-width 0.2s ease;
+  transform-origin: 150px 150px;
+}
+
+.pizza-slice:hover {
+  filter: brightness(1.15) drop-shadow(0 0 10px rgba(245, 158, 11, 0.8));
+}
+
+.pizza-slice.selected {
+  filter: brightness(1.25) drop-shadow(0 0 16px rgba(16, 185, 129, 0.9));
+  stroke: #34D399 !important;
+  stroke-width: 3.5 !important;
+}
+
+/* Indicador visual de fração sob a pizza */
+.fraction-counter-strip {
+  width: 100%;
+  background: rgba(56, 189, 248, 0.06);
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  border-radius: var(--radius-lg);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.fraction-badge-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fraction-visual-display {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.fraction-num {
+  color: #67E8F9;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 2px;
+  width: 100%;
+  text-align: center;
+}
+
+.fraction-den {
+  color: #D8B4FE;
+  padding-top: 2px;
+  width: 100%;
+  text-align: center;
+}
+
+/* PAINEL DE PEDIDO / COMANDA */
+.order-ticket-panel {
+  background: var(--bg-surface);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.28), 0 0 25px rgba(56, 189, 248, 0.1);
+  position: relative;
+}
+
+.order-badge-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(168, 85, 247, 0.14);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: #E9D5FF;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  align-self: flex-start;
+}
+
+.order-prompt {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+.order-prompt strong {
+  color: #67E8F9;
+  font-size: 1.55rem;
+}
+
+.order-instruction {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-top: -6px;
+}
+
+/* CONTROLES DE RESPOSTA */
+.pizza-controls-area {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.slice-quick-tools {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-slice-tool {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-secondary);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-slice-tool:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: rgba(168, 85, 247, 0.5);
+  color: #E9D5FF;
+}
+
+.btn-serve-pizza {
+  background: linear-gradient(135deg, #1687F8, #9333EA 60%, #D946EF);
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 800;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 25px rgba(147, 51, 234, 0.28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all var(--transition-fast);
+  width: 100%;
+}
+
+.btn-serve-pizza:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 35px rgba(147, 51, 234, 0.38);
+  filter: brightness(1.1);
+}
+
+.btn-serve-pizza:active {
+  transform: scale(0.98);
+}
+
+/* DICAS */
+.hints-row {
+  display: flex;
+  gap: 8px;
+  margin-top: var(--space-xs);
+}
+
+.hint-box {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.32);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: #E9D5FF;
+  margin-top: 6px;
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.hint-box.visible {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* FEEDBACK CARD */
+.pizza-feedback {
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  margin-top: var(--space-sm);
+  display: none;
+  animation: fadeIn 0.35s ease;
+}
+
+.pizza-feedback.visible {
+  display: block;
+}
+
+.pizza-feedback--correct {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  color: #34D399;
+}
+
+.pizza-feedback--wrong {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  color: #FCA5A5;
+}
+
+/* MODAL DE VITÓRIA */
+.pizza-star-rating {
+  font-size: 2.4rem;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Tema claro */
+html[data-theme="light"] .pizza-theme {
+  background-color: var(--bg-base);
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(147, 51, 234, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(217, 70, 239, 0.04) 0%, transparent 60%);
+}
+
+html[data-theme="light"] .game-hud-topbar {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom-color: rgba(147, 51, 234, 0.2);
+  box-shadow: var(--shadow-sm);
+}
+
+html[data-theme="light"] .hud-status-bar,
+html[data-theme="light"] .pizza-board-card {
+  background: #FFFFFF;
+  border-color: rgba(147, 51, 234, 0.22);
+  box-shadow: var(--shadow-md);
+}
+
+html[data-theme="light"] .fraction-counter-strip {
+  background: #E0F7FF;
+  border-color: #A5EAF5;
+}
+
+html[data-theme="light"] .fraction-num {
+  color: #0E7490;
+  border-bottom-color: #CBD5E1;
+}
+
+html[data-theme="light"] .fraction-den,
+html[data-theme="light"] .text-pizza-gold,
+html[data-theme="light"] .order-prompt strong {
+  color: #7E22CE;
+}
+
+html[data-theme="light"] .order-ticket-panel {
+  box-shadow: var(--shadow-md);
+}
+
+html[data-theme="light"] .order-badge-header {
+  background: #F3E8FF;
+  border-color: #D8B4FE;
+  color: #6B21A8;
+}
+
+html[data-theme="light"] .btn-slice-tool {
+  background: #E0F7FF;
+  border-color: #A5EAF5;
+  color: #075985;
+}
+
+html[data-theme="light"] .btn-slice-tool:hover {
+  background: #CFFAFE;
+  color: #155E75;
+}
+
+html[data-theme="light"] .hint-box {
+  background: #F3E8FF;
+  border-color: #D8B4FE;
+  color: #6B21A8;
+}
+
+html[data-theme="light"] .pizza-feedback--correct {
+  background: #F0FDF4;
+  border-color: #86EFAC;
+  color: #166534;
+}
+
+html[data-theme="light"] .pizza-feedback--wrong {
+  background: #FFF1F2;
+  border-color: #FDA4AF;
+  color: #9F1239;
+}
+
+html[data-theme="dark"] .game-hud-topbar {
+  color: var(--text-primary);
+}

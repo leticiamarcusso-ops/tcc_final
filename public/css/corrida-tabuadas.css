@@ -1,0 +1,439 @@
+.race-theme {
+  min-height: 100vh;
+  color: var(--text-primary);
+  background-color: #F6F4FF;
+  background-image:
+    radial-gradient(circle at 12% 15%, rgba(56, 189, 248, 0.16), transparent 34%),
+    radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.14), transparent 38%);
+  font-family: var(--font-body);
+}
+
+html[data-theme="dark"] .race-theme {
+  background-color: #100D1B;
+  background-image:
+    radial-gradient(circle at 12% 15%, rgba(56, 189, 248, 0.12), transparent 34%),
+    radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.14), transparent 38%);
+}
+
+.race-topbar-brand,
+.race-topbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.race-topbar-brand strong {
+  color: var(--color-primary-dark);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+html[data-theme="dark"] .race-topbar-brand strong {
+  color: var(--color-primary-light);
+}
+
+.race-logo {
+  width: auto;
+  height: 38px;
+}
+
+.race-topbar-controls label {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.race-topbar-controls select {
+  width: auto;
+  min-width: 110px;
+}
+
+.race-topbar-controls .hud-user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+}
+
+.race-topbar-controls #topbar-avatar {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  background: var(--bg-elevated);
+}
+
+.race-theme .game-container {
+  width: min(1120px, 100%);
+  padding-top: clamp(24px, 4vw, 48px);
+}
+
+.race-intro {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.race-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border: 1px solid #BAE6FD;
+  border-radius: var(--radius-full);
+  background: #E0F7FF;
+  color: #075985;
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+html[data-theme="dark"] .race-kicker {
+  border-color: #51416A;
+  background: #272039;
+  color: #BAE6FD;
+}
+
+.race-intro h1 {
+  margin-top: 12px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.race-intro p {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}
+
+.race-status {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 24px;
+}
+
+.race-status .hud-stat-box {
+  align-items: center;
+  text-align: center;
+}
+
+.race-status .hud-stat-label {
+  font-size: 0.82rem;
+}
+
+.race-status .hud-stat-value {
+  color: var(--color-primary-dark);
+  font-family: var(--font-body);
+  font-size: 1.45rem;
+  font-weight: 900;
+}
+
+html[data-theme="dark"] .race-status .hud-stat-value {
+  color: var(--color-primary-light);
+}
+
+.race-status .stars-track {
+  justify-content: center;
+}
+
+.race-arena {
+  display: grid;
+  gap: 22px;
+}
+
+.race-track-card,
+.race-question-panel {
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius-2xl);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.race-track-card {
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.race-track-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.race-track-header span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.race-track-header span:last-child {
+  color: var(--color-accent-dark);
+}
+
+.race-track {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 12px 38px 12px 0;
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  border-right: 4px dashed var(--color-accent);
+  border-radius: var(--radius-lg);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 50px, rgba(22, 135, 248, 0.07) 50px 52px),
+    var(--bg-elevated);
+}
+
+.race-track-lane {
+  position: relative;
+  height: 42px;
+  border-bottom: 2px dashed var(--border-color);
+}
+
+.race-track-lane:last-of-type {
+  border-bottom: 0;
+}
+
+.race-car {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: grid;
+  width: 42px;
+  height: 36px;
+  place-items: center;
+  font-size: 1.8rem;
+  left: var(--race-progress, 0%);
+  transform: translateY(-50%);
+  transition: left 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.race-car--rival {
+  opacity: 0.68;
+  left: 14%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.race-finish {
+  position: absolute;
+  top: 7px;
+  right: 22px;
+  bottom: 7px;
+  width: 14px;
+  border: 2px solid var(--text-primary);
+  background:
+    linear-gradient(45deg, var(--text-primary) 25%, transparent 25%, transparent 75%, var(--text-primary) 75%),
+    linear-gradient(45deg, var(--text-primary) 25%, transparent 25%, transparent 75%, var(--text-primary) 75%);
+  background-position: 0 0, 6px 6px;
+  background-size: 12px 12px;
+}
+
+.race-track-tip {
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.race-question-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 40px);
+  text-align: center;
+}
+
+.race-theme .question-badge {
+  border-color: #A5EAF5;
+  background: #E0F7FF;
+  color: #075985;
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+html[data-theme="dark"] .race-theme .question-badge {
+  border-color: #51416A;
+  background: #272039;
+  color: #BAE6FD;
+}
+
+.race-question {
+  width: 100%;
+  padding: 18px;
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(120deg, #E0F7FF, #F3E8FF);
+  color: #29213D;
+  font-size: clamp(2.25rem, 6vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+html[data-theme="dark"] .race-question {
+  background: linear-gradient(120deg, #172B49, #35204D);
+  color: #F7F2FF;
+}
+
+.race-question-context {
+  margin-top: -8px;
+  color: var(--text-secondary);
+}
+
+.race-answer-form {
+  width: min(620px, 100%);
+  text-align: left;
+}
+
+.race-answer-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-weight: 900;
+}
+
+.race-answer-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.race-answer-controls .answer-input {
+  min-width: 0;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.race-answer-controls .btn {
+  white-space: nowrap;
+}
+
+.race-theme .feedback-card {
+  width: 100%;
+  max-width: 620px;
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 800;
+  text-align: center;
+}
+
+.race-theme .hints-panel {
+  margin-top: 0;
+}
+
+.race-theme .hint-text {
+  width: 100%;
+  max-width: 620px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.race-finish-icon {
+  margin-bottom: 8px;
+  font-size: 4rem;
+}
+
+.race-theme .gameover-modal h2 {
+  font-family: var(--font-body);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 900;
+}
+
+.race-final-stars {
+  margin: 12px 0;
+  color: #EAB308;
+  font-size: 2.4rem;
+}
+
+.race-results {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.race-results div {
+  display: grid;
+  gap: 4px;
+  padding: 12px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+}
+
+.race-results span {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.race-results strong {
+  color: var(--color-primary-dark);
+  font-size: 1.35rem;
+}
+
+html[data-theme="dark"] .race-results strong {
+  color: var(--color-primary-light);
+}
+
+.race-finish-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 760px) {
+  .race-topbar-brand,
+  .race-topbar-controls {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .race-status {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: var(--space-md);
+  }
+}
+
+@media (max-width: 520px) {
+  .race-topbar-brand strong {
+    width: 100%;
+    text-align: center;
+  }
+
+  .race-topbar-controls {
+    gap: 8px;
+  }
+
+  .race-topbar-controls .hud-user-info {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .race-track-header {
+    font-size: 0.8rem;
+  }
+
+  .race-answer-controls {
+    flex-direction: column;
+  }
+
+  .race-answer-controls .btn {
+    width: 100%;
+  }
+
+  .race-results {
+    gap: 6px;
+  }
+}

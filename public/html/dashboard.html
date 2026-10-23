@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Jogaê</title>
+  
+  <script src="../js/require-auth.js"></script>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Seu painel de controle e aprendizagem matemática no Jogaê.">
+
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Ícones Phosphor -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Estilos da Aplicação -->
+  <link rel="stylesheet" href="../css/global.css?v=5">
+  <link rel="stylesheet" href="../css/components.css?v=5">
+  <link rel="stylesheet" href="../css/nav.css?v=5">
+  <link rel="stylesheet" href="../css/dashboard.css?v=5">
+</head>
+<body data-page="dashboard">
+
+  <!-- ══════════════════════════════════════════
+       NAVBAR PRINCIPAL
+       ══════════════════════════════════════════ -->
+  <nav class="navbar" aria-label="Navegação principal">
+    <div class="nav-container">
+      <a href="dashboard.html" class="nav-brand" aria-label="Jogaê — Início">
+        <img src="../../assets/img/logo.png" alt="Jogaê Logo" class="nav-logo-img">
+      </a>
+
+      <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Abrir menu de navegação">
+        <i class="ph-bold ph-list"></i>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="dashboard.html" class="nav-link active"><i class="ph-bold ph-house"></i> Início</a>
+        <a href="jogos.html"     class="nav-link"><i class="ph-bold ph-game-controller"></i> Jogos</a>
+        <a href="videoaulas.html" class="nav-link"><i class="ph-bold ph-youtube-logo"></i> Videoaulas</a>
+        <a href="ranking.html"   class="nav-link"><i class="ph-bold ph-trophy"></i> Ranking</a>
+        <a href="perfil.html"    class="nav-link"><i class="ph-bold ph-user-circle"></i> Perfil</a>
+        <a href="professor.html" id="nav-prof-portal" class="nav-link"
+           style="display:none;color:var(--accent);background:rgba(255,107,53,0.12);border:1px solid rgba(255,107,53,0.3);border-radius:var(--radius-full);">
+          <i class="ph-bold ph-chalkboard-teacher"></i> Portal do Professor
+        </a>
+        <button id="btn-logout" class="btn btn-outline btn-sm" style="margin-left:8px;" aria-label="Encerrar sessão">
+          <i class="ph-bold ph-sign-out"></i> Sair
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       CONTEÚDO DO DASHBOARD
+       ══════════════════════════════════════════ -->
+  <main class="container page-content dashboard-page" id="main-content">
+
+    <!-- ──────────────────────────────────────────
+         1. HERO SECTION (Boas-vindas & Nível)
+         ────────────────────────────────────────── -->
+    <header class="dash-hero" aria-label="Boas-vindas do usuário">
+
+      <!-- Esquerda: Informações do Aluno -->
+      <div class="dash-hero-info">
+        <div class="dash-eyebrow">
+          <i class="ph-bold ph-sparkle"></i> Espaço de Aprendizagem Gamificada
+        </div>
+
+        <div class="dash-identity">
+          <div class="dash-avatar-wrapper">
+            <div class="dash-avatar" id="hero-avatar" aria-label="Avatar do jogador">🚀</div>
+            <div class="dash-status-dot" title="Sessão ativa"></div>
+          </div>
+          <div>
+            <div class="dash-user-tags">
+              <span class="dash-tag-level" id="user-level-badge">
+                <i class="ph-bold ph-seal-check"></i> Nível 1 • Aprendiz
+              </span>
+              <span class="dash-tag-role" id="user-perfil-tag">
+                <i class="ph-bold ph-student"></i> Aluno
+              </span>
+            </div>
+            <h1 class="dash-title">
+              <span id="user-saudacao">Olá</span>, <span id="user-name-display">...</span>!
+            </h1>
+          </div>
+        </div>
+
+        <p class="dash-subtitle">
+          Explore desafios interativos, exercite seu raciocínio lógico e acompanhe sua evolução matemática em tempo real.
+        </p>
+
+        <div class="dash-cta-group">
+          <a href="jogos.html" class="dash-btn-primary">
+            <i class="ph-bold ph-game-controller"></i> Jogar Agora
+          </a>
+          <a href="videoaulas.html" class="dash-btn-glass">
+            <i class="ph-bold ph-play-circle"></i> Videoaulas
+          </a>
+          <a href="ranking.html" class="dash-btn-glass">
+            <i class="ph-bold ph-trophy"></i> Ver Ranking
+          </a>
+        </div>
+      </div>
+
+      <!-- Direita: Card do Desafio em Destaque -->
+      <aside class="dash-featured-card" aria-label="Desafio em destaque">
+        <div class="dash-featured-badge">
+          <i class="ph-bold ph-lightning"></i> Destaque do Dia
+        </div>
+        <div class="dash-featured-center">
+          <div class="dash-featured-illustration">
+            <i class="ph-fill ph-planet"></i>
+          </div>
+          <h2 class="dash-featured-title">Batalha Espacial</h2>
+          <p class="dash-featured-desc">Operações com números inteiros no espaço sideral.</p>
+        </div>
+        <a href="jogo1.html" class="dash-featured-play">
+          Decolar agora <i class="ph-bold ph-arrow-right"></i>
+        </a>
+      </aside>
+
+      <!-- Barra de Progresso de XP (Arejada e Completa) -->
+      <div class="dash-xp-container" aria-label="Progresso de experiência">
+        <div class="dash-xp-meta">
+          <span class="dash-xp-title">
+            <i class="ph-bold ph-lightning" style="color:#FACC15;"></i> Progresso do Nível Atual
+          </span>
+          <span class="dash-xp-counter" id="xp-bar-text">0 / 200 XP (0%)</span>
+        </div>
+        <div class="dash-xp-bar-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Barra de XP">
+          <div class="dash-xp-bar-fill" id="xp-bar-fill"></div>
+        </div>
+        <div class="dash-xp-footer-note">
+          <span id="xp-left-text">Faltam 200 XP para o próximo nível</span>
+          <span>Ganhe XP completando partidas e missões</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ──────────────────────────────────────────
+         2. KPIS / CARDS DE DESEMPENHO (Arejados)
+         ────────────────────────────────────────── -->
+    <section class="dash-section" aria-label="Estatísticas principais">
+      <div class="dash-section-header">
+        <div class="dash-section-title-wrap">
+          <span class="dash-kicker">Métricas de Desempenho</span>
+          <h2 class="dash-heading"><i class="ph-bold ph-chart-line-up" style="color:var(--color-primary)"></i> Visão Geral</h2>
+        </div>
+        <a href="ranking.html" class="dash-link">
+          Ranking completo <i class="ph-bold ph-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="dash-kpi-grid">
+        <!-- 1. XP Total -->
+        <div class="dash-kpi-card kpi-purple">
+          <div class="dash-kpi-icon-wrap">
+            <i class="ph-bold ph-lightning"></i>
+          </div>
+          <div class="dash-kpi-content">
+            <span class="dash-kpi-value" id="stat-exp">0</span>
+            <span class="dash-kpi-label">Pontos de XP</span>
+          </div>
+        </div>
+
+        <!-- 2. Partidas Jogadas -->
+        <div class="dash-kpi-card kpi-blue">
+          <div class="dash-kpi-icon-wrap">
+            <i class="ph-bold ph-game-controller"></i>
+          </div>
+          <div class="dash-kpi-content">
+            <span class="dash-kpi-value" id="stat-games">0</span>
+            <span class="dash-kpi-label">Partidas Jogadas</span>
+          </div>
+        </div>
+
+        <!-- 3. Taxa de Precisão -->
+        <div class="dash-kpi-card kpi-emerald">
+          <div class="dash-kpi-icon-wrap">
+            <i class="ph-bold ph-target"></i>
+          </div>
+          <div class="dash-kpi-content">
+            <span class="dash-kpi-value" id="stat-accuracy">0%</span>
+            <span class="dash-kpi-label">Precisão de Acertos</span>
+          </div>
+        </div>
+
+        <!-- 4. Total de Acertos -->
+        <div class="dash-kpi-card kpi-amber">
+          <div class="dash-kpi-icon-wrap">
+            <i class="ph-bold ph-check-circle"></i>
+          </div>
+          <div class="dash-kpi-content">
+            <span class="dash-kpi-value" id="stat-time">0</span>
+            <span class="dash-kpi-label">Acertos Totais</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────
+         3. GRID PRINCIPAL ORGANIZADO EM 2 COLUNAS
+         ────────────────────────────────────────── -->
+    <div class="dash-main-grid">
+
+      <!-- ════ COLUNA ESQUERDA (Principal: Jogos & Conquistas) ════ -->
+      <div class="dash-main-col">
+
+        <!-- Card: Jogos em Destaque -->
+        <section class="dash-card" aria-label="Catálogo de jogos">
+          <div class="dash-card-header">
+            <h2 class="dash-card-title">
+              <i class="ph-bold ph-rocket-launch" style="color:var(--color-primary)"></i> Jogos de Matemática
+            </h2>
+            <a href="jogos.html" class="dash-link" style="font-size:0.84rem;">
+              Ver todos <i class="ph-bold ph-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="dash-games-stack">
+            <!-- Jogo 1: Batalha Espacial -->
+            <a href="jogo1.html" class="dash-game-row">
+              <div class="dash-game-main">
+                <div class="dash-game-icon-box icon-space">
+                  <i class="ph-bold ph-planet"></i>
+                </div>
+                <div class="dash-game-meta">
+                  <div class="dash-game-meta-top">
+                    <h3 class="dash-game-name">Batalha Espacial</h3>
+                  </div>
+                  <span class="dash-game-topic">Operações com Números Inteiros • 7º e 8º ano</span>
+                </div>
+              </div>
+              <span class="btn btn-primary btn-sm dash-game-btn">
+                <i class="ph-bold ph-play"></i> Jogar
+              </span>
+            </a>
+
+            <!-- Jogo 2: Corrida das Tabuadas -->
+            <a href="jogo2.html" class="dash-game-row">
+              <div class="dash-game-main">
+                <div class="dash-game-icon-box icon-race">
+                  <i class="ph-bold ph-car-simple"></i>
+                </div>
+                <div class="dash-game-meta">
+                  <div class="dash-game-meta-top">
+                    <h3 class="dash-game-name">Corrida das Tabuadas</h3>
+                  </div>
+                  <span class="dash-game-topic">Multiplicação & Agilidade Mental • 6º ao 9º ano</span>
+                </div>
+              </div>
+              <span class="btn btn-accent btn-sm dash-game-btn">
+                <i class="ph-bold ph-play"></i> Jogar
+              </span>
+            </a>
+
+            <!-- Jogo 3: Pizza das Frações -->
+            <a href="jogo3.html" class="dash-game-row">
+              <div class="dash-game-main">
+                <div class="dash-game-icon-box icon-pizza">
+                  <i class="ph-bold ph-pizza"></i>
+                </div>
+                <div class="dash-game-meta">
+                  <div class="dash-game-meta-top">
+                    <h3 class="dash-game-name">Pizza das Frações</h3>
+                    <span class="dash-pill-new">Novo!</span>
+                  </div>
+                  <span class="dash-game-topic">Frações, Partes do Todo e Equivalência • 6º/7º ano</span>
+                </div>
+              </div>
+              <span class="btn btn-primary btn-sm dash-game-btn">
+                <i class="ph-bold ph-play"></i> Jogar
+              </span>
+            </a>
+          </div>
+        </section>
+
+        <!-- Card: Conquistas & Medalhas -->
+        <section class="dash-card" aria-label="Conquistas e troféus">
+          <div class="dash-card-header">
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+              <h2 class="dash-card-title">
+                <i class="ph-bold ph-medal" style="color:var(--color-warning)"></i> Conquistas
+              </h2>
+              <span class="dash-achieve-progress-pill" id="achievements-progress-pill">Carregando...</span>
+            </div>
+            <a href="perfil.html" class="dash-link" style="font-size:0.84rem;">
+              Ver perfil <i class="ph-bold ph-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="dash-achievements-grid" id="achievements-grid">
+            <div class="dash-skeleton" style="height:140px;"></div>
+            <div class="dash-skeleton" style="height:140px;"></div>
+            <div class="dash-skeleton" style="height:140px;"></div>
+            <div class="dash-skeleton" style="height:140px;"></div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ════ COLUNA DIREITA (Lateral: Turma, Histórico & Atalhos) ════ -->
+      <div class="dash-main-col">
+
+        <!-- Card: Turma Escolar (Perfeitamente Integrado) -->
+        <section class="dash-card" id="section-aluno-turma" aria-label="Turma escolar">
+          <div class="dash-card-header">
+            <h2 class="dash-card-title">
+              <i class="ph-bold ph-users-three" style="color:var(--color-primary)"></i> Sua Turma
+            </h2>
+            <span class="dash-card-subtitle">Sala de Aula</span>
+          </div>
+
+          <div class="dash-turma-card-intro">
+            <div class="dash-turma-card-icon">
+              <i class="ph-bold ph-chalkboard"></i>
+            </div>
+            <div class="dash-turma-card-text">
+              <p>Conecte-se com sua sala escolar para receber atividades e pontuações do seu professor.</p>
+            </div>
+          </div>
+
+          <div id="aluno-turmas-list" style="margin-bottom:16px;">
+            <div class="dash-classroom-empty-text">
+              <i class="ph-bold ph-info" style="color:var(--color-primary);font-size:1.2rem;flex-shrink:0;"></i>
+              <span>Você ainda não entrou em uma turma. Insira o código recebido:</span>
+            </div>
+          </div>
+
+          <form id="form-entrar-turma">
+            <div class="dash-classroom-form-row">
+              <input type="text" id="input-codigo-turma" class="form-control"
+                     placeholder="Ex: JOG-701" maxlength="15" required
+                     aria-label="Código da turma escolar">
+              <button type="submit" class="btn btn-primary" style="flex-shrink:0;">
+                <i class="ph-bold ph-plus-circle"></i> Entrar
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Card: Missões do Professor (Se houver) -->
+        <section class="dash-missions-container" id="section-missoes-professor" style="display:none;" aria-label="Missões atribuídas">
+          <div class="dash-card-header" style="border:none;padding-bottom:0;margin-bottom:8px;">
+            <h2 class="dash-card-title" style="font-size:1.1rem;">
+              <i class="ph-bold ph-paper-plane-tilt" style="color:var(--accent);"></i> Missões do Professor
+            </h2>
+          </div>
+          <div class="dash-missions-grid" id="missoes-professor-list"></div>
+        </section>
+
+        <!-- Card: Histórico Recente de Partidas -->
+        <section class="dash-card" aria-label="Histórico recente">
+          <div class="dash-card-header">
+            <h2 class="dash-card-title">
+              <i class="ph-bold ph-clock-counter-clockwise" style="color:var(--color-primary)"></i> Histórico Recente
+            </h2>
+            <span class="dash-card-subtitle">Últimas jogadas</span>
+          </div>
+
+          <div id="history-list" class="dash-history-list">
+            <div class="dash-skeleton" style="height:60px;"></div>
+            <div class="dash-skeleton" style="height:60px;"></div>
+            <div class="dash-skeleton" style="height:60px;"></div>
+          </div>
+
+          <div id="history-empty" class="dash-empty-state" style="display:none;">
+            <i class="ph-bold ph-ghost"></i>
+            <p>Nenhuma partida concluída ainda.<br>Jogue qualquer desafio para registrar seu histórico!</p>
+          </div>
+        </section>
+
+        <!-- Card: Atalhos Rápidos de Estudo -->
+        <section class="dash-card" aria-label="Navegação rápida">
+          <div class="dash-card-header">
+            <h2 class="dash-card-title">
+              <i class="ph-bold ph-compass" style="color:var(--accent)"></i> Navegação Rápida
+            </h2>
+          </div>
+
+          <div class="dash-quick-links">
+            <a href="videoaulas.html" class="dash-quick-card">
+              <div class="dash-quick-icon" style="background:rgba(239,68,68,0.12);color:#DC2626;">
+                <i class="ph-bold ph-youtube-logo"></i>
+              </div>
+              <div>
+                <strong>Videoaulas</strong>
+                <span>Reforce o conteúdo</span>
+              </div>
+            </a>
+
+            <a href="ranking.html" class="dash-quick-card">
+              <div class="dash-quick-icon" style="background:rgba(234,179,8,0.15);color:#CA8A04;">
+                <i class="ph-bold ph-trophy"></i>
+              </div>
+              <div>
+                <strong>Ranking</strong>
+                <span>Veja sua posição</span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Scripts da Aplicação -->
+  <script src="../js/api.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

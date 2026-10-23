@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corrida das Tabuadas — Jogaê</title>
+  <script src="../js/require-auth.js"></script>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Acelere na Corrida das Tabuadas e pratique multiplicação em um desafio divertido de matemática.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/jogos-visual.css">
+  <link rel="stylesheet" href="../css/corrida-tabuadas.css">
+</head>
+<body data-page="jogo2" class="race-theme">
+  <header class="game-hud-topbar">
+    <div class="hud-topbar-container">
+      <div class="race-topbar-brand">
+        <a href="jogos.html" class="btn btn-outline btn-sm" id="btn-menu-jogo2">
+          <i class="ph-bold ph-arrow-left" aria-hidden="true"></i> Voltar aos Jogos
+        </a>
+        <img src="../../assets/img/logo.png" alt="Jogaê Logo" class="race-logo">
+        <strong>Corrida das Tabuadas</strong>
+      </div>
+
+      <div class="race-topbar-controls">
+        <label for="nivel2-select">Dificuldade</label>
+        <select id="nivel2-select" class="form-control input-sm">
+          <option value="facil">Fácil</option>
+          <option value="medio">Médio</option>
+          <option value="dificil">Difícil</option>
+        </select>
+        <div class="hud-user-info">
+          <span id="topbar-avatar" aria-hidden="true">👤</span>
+          <span id="topbar-nome">Jogador</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="game-container">
+    <section class="race-intro" aria-labelledby="race-title">
+      <span class="race-kicker"><i class="ph-bold ph-flag-checkered" aria-hidden="true"></i> Pronto, piloto?</span>
+      <h1 id="race-title">Corrida das Tabuadas</h1>
+      <p>Acerte as multiplicações para avançar seu carrinho e cruzar a linha de chegada!</p>
+    </section>
+
+    <section class="hud-status-bar card race-status" aria-label="Progresso da corrida">
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">PONTOS</span>
+        <span class="hud-stat-value" id="hud2-score">0</span>
+      </div>
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">QUESTÃO</span>
+        <span class="hud-stat-value" id="hud2-questao">Questão 1/5</span>
+      </div>
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">ACERTOS</span>
+        <span class="hud-stat-value" id="race-correct-count">0</span>
+      </div>
+      <div class="hud-stat-box">
+        <span class="hud-stat-label">ESTRELAS</span>
+        <div class="stars-track" aria-label="Estrelas conquistadas">
+          <span class="star-icon" id="star-1">★</span>
+          <span class="star-icon" id="star-2">★</span>
+          <span class="star-icon" id="star-3">★</span>
+          <span class="star-icon" id="star-4">★</span>
+          <span class="star-icon" id="star-5">★</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="race-arena">
+      <div class="race-track-card card" aria-label="Pista da corrida">
+        <div class="race-track-header">
+          <span><i class="ph-bold ph-road-horizon" aria-hidden="true"></i> Pista da Matemática</span>
+          <span><i class="ph-bold ph-flag-checkered" aria-hidden="true"></i> Chegada</span>
+        </div>
+        <div class="race-track" aria-hidden="true">
+          <div class="race-track-lane race-track-lane--rival">
+            <span class="race-car race-car--rival">🏎️</span>
+          </div>
+          <div class="race-track-lane race-track-lane--player">
+            <span class="race-car" id="race-car">🚗</span>
+          </div>
+          <div class="race-finish"></div>
+        </div>
+        <p class="race-track-tip">Cada resposta certa leva seu carrinho mais perto da vitória!</p>
+      </div>
+
+      <div class="race-question-panel card">
+        <div class="question-badge">
+          <i class="ph-bold ph-lightning" aria-hidden="true"></i> Resolva a multiplicação:
+        </div>
+        <div class="race-question" id="equation-text" aria-live="polite">Preparando a corrida...</div>
+        <p class="race-question-context" id="equation-context">Pense na tabuada e digite o resultado.</p>
+
+        <form class="race-answer-form" id="race-answer-form">
+          <label for="answer2-input">Qual é o resultado?</label>
+          <div class="race-answer-controls">
+            <input type="number" id="answer2-input" class="form-control answer-input" inputmode="numeric" placeholder="Sua resposta" autocomplete="off" required>
+            <button id="btn-confirmar2" class="btn btn-primary btn-lg" type="submit">
+              Acelerar <i class="ph-bold ph-arrow-fat-lines-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
+
+        <div id="feedback2-card" class="feedback-card" aria-live="polite"></div>
+
+        <div class="hints-panel">
+          <button id="btn-dica2-1" class="btn btn-outline btn-sm" type="button">
+            <i class="ph-bold ph-lightbulb" aria-hidden="true"></i> Dica 1
+          </button>
+          <button id="btn-dica2-2" class="btn btn-outline btn-sm" type="button">
+            <i class="ph-bold ph-lightbulb-filament" aria-hidden="true"></i> Dica 2
+          </button>
+        </div>
+        <div id="hint2-1-text" class="hint-text"></div>
+        <div id="hint2-2-text" class="hint-text"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="victory-overlay" class="gameover-overlay hidden">
+    <section class="gameover-modal card text-center" role="dialog" aria-modal="true" aria-labelledby="race-finish-title">
+      <div class="race-finish-icon" aria-hidden="true">🏁</div>
+      <h2 id="race-finish-title">Você cruzou a linha de chegada!</h2>
+      <p class="text-secondary">Mandou muito bem nas tabuadas!</p>
+      <div id="vic-stars" class="race-final-stars" aria-label="Estrelas da corrida">☆☆☆</div>
+      <div class="race-results">
+        <div><span>Pontos</span><strong id="vic-score">0</strong></div>
+        <div><span>Acertos</span><strong id="vic-acertos">0</strong></div>
+        <div><span>Erros</span><strong id="vic-erros">0</strong></div>
+      </div>
+      <div class="race-finish-actions">
+        <button id="btn-jogar-novamente2" class="btn btn-primary btn-lg" type="button">
+          <i class="ph-bold ph-arrows-clockwise" aria-hidden="true"></i> Nova Corrida
+        </button>
+        <button id="btn-voltar2" class="btn btn-secondary btn-lg" type="button">
+          <i class="ph-bold ph-game-controller" aria-hidden="true"></i> Ver Jogos
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/jogo2.js"></script>
+</body>
+</html>

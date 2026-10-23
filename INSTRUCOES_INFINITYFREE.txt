@@ -1,0 +1,29 @@
+INSTALACAO DO JOGAAE NO INFINITYFREE
+
+1. Envie este arquivo ZIP para a pasta htdocs da sua conta.
+2. Extraia o ZIP diretamente dentro de htdocs. Nao coloque os arquivos dentro
+   de uma pasta extra.
+3. Confira se a estrutura ficou assim:
+
+   htdocs/
+     index.php
+     index.html
+     public/
+       css/
+       html/
+       js/
+     backend/
+     assets/
+     database/
+
+4. Se o gerenciador de arquivos nao extrair as pastas, use um cliente FTP,
+   como FileZilla, e envie todas as pastas e arquivos do ZIP para htdocs.
+   Nao envie somente index.php: as paginas dependem de public/css, public/js,
+   assets e backend.
+5. Crie um banco MySQL no painel do InfinityFree e importe database/schema.sql
+   no phpMyAdmin com esse banco selecionado.
+6. Edite backend/config/database.php no servidor e preencha o host, nome do
+   banco, usuario e senha MySQL exibidos no painel.
+
+O ZIP contem arquivos e pastas na raiz do pacote. Ao extrair diretamente em
+htdocs, nao deve aparecer uma pasta extra envolvendo todo o site.

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking Global — Jogaê</title>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Ranking global de matemática. Veja quem são os maiores pontuadores da plataforma Jogaê!">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/ranking.css">
+</head>
+<body data-page="ranking">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="../../assets/img/logo.png" alt="Jogaê Logo" class="nav-logo-img">
+      </a>
+
+      <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Menu">
+        <i class="ph-bold ph-list"></i>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="dashboard.html" class="nav-link"><i class="ph-bold ph-house"></i> Início</a>
+        <a href="jogos.html" class="nav-link"><i class="ph-bold ph-game-controller"></i> Jogos</a>
+        <a href="ranking.html" class="nav-link active"><i class="ph-bold ph-trophy"></i> Ranking</a>
+        <a href="perfil.html" class="nav-link"><i class="ph-bold ph-user-circle"></i> Perfil</a>
+        <button id="btn-logout" class="btn btn-outline btn-sm" style="margin-left: 8px;">
+          <i class="ph-bold ph-sign-out"></i> Sair
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- RANKING MAIN CONTENT -->
+  <main class="container page-content ranking-page">
+    
+    <header class="text-center" style="margin-bottom: var(--space-2xl);">
+      <div class="badge badge-purple" style="margin-bottom: 8px;">
+        <i class="ph-bold ph-crown"></i> Ligas & Pontuação
+      </div>
+      <h1 class="text-3xl font-bold">Hall da Fama da Matemática</h1>
+      <p class="text-secondary">Os maiores pontuadores do Jogaê em todas as partidas.</p>
+    </header>
+
+    <!-- FILTER BUTTONS -->
+    <div class="ranking-filters" style="display: flex; justify-content: center; gap: 8px; margin-bottom: var(--space-2xl); flex-wrap: wrap;">
+      <button class="filter-btn active" data-filtro="global">
+        <i class="ph-bold ph-globe"></i> Ranking Global
+      </button>
+      <button class="filter-btn" data-filtro="jogo1">
+        <i class="ph-bold ph-planet"></i> Batalha Espacial
+      </button>
+      <button class="filter-btn" data-filtro="jogo2">
+        <i class="ph-bold ph-car-simple"></i> Corrida das Tabuadas
+      </button>
+      <button class="filter-btn" data-filtro="jogo3">
+        <i class="ph-bold ph-pizza"></i> Pizza das Frações
+      </button>
+    </div>
+
+    <!-- PODIUM (TOP 3) -->
+    <div id="podium" class="podium-container"></div>
+
+    <!-- LEADERBOARD TABLE -->
+    <div class="card" style="padding: 0; overflow: hidden; margin-top: var(--space-xl);">
+      <div id="ranking-list" class="ranking-table"></div>
+    </div>
+
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/ranking.js"></script>
+  <script>
+    // Hamburger menu toggle
+    document.getElementById('nav-toggle')?.addEventListener('click', () => {
+      document.getElementById('nav-links')?.classList.toggle('open');
+    });
+    // Logout
+    document.getElementById('btn-logout')?.addEventListener('click', async () => {
+      await api.post('/auth/logout.php');
+      limparUsuarioLocal();
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>

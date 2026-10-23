@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Professor — Jogaae</title>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Painel de controle educacional para professores. Gerencie suas turmas de matemática e acompanhe o desempenho dos alunos.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body data-page="professor">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="../../assets/img/logo.png" alt="Jogaê Logo" class="nav-logo-img">
+      </a>
+
+      <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Menu">
+        <i class="ph-bold ph-list"></i>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="dashboard.html" class="nav-link"><i class="ph-bold ph-house"></i> Início</a>
+        <a href="jogos.html" class="nav-link"><i class="ph-bold ph-game-controller"></i> Jogos</a>
+        <a href="professor.html" class="nav-link active"><i class="ph-bold ph-chalkboard-teacher"></i> Portal do Professor</a>
+        <a href="ranking.html" class="nav-link"><i class="ph-bold ph-trophy"></i> Ranking</a>
+        <a href="perfil.html" class="nav-link"><i class="ph-bold ph-user-circle"></i> Perfil</a>
+        <button id="btn-logout" class="btn btn-outline btn-sm" style="margin-left: 8px;">
+          <i class="ph-bold ph-sign-out"></i> Sair
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PROFESSOR PORTAL CONTENT -->
+  <main class="container page-content">
+    
+    <!-- WELCOME HERO BANNER -->
+    <header class="dashboard-hero card professor-dashboard-hero">
+      <div class="hero-user-info">
+        <div class="user-avatar professor-dashboard-avatar">
+          <i class="ph-bold ph-chalkboard-teacher" style="font-size: 2.2rem; color: var(--primary-glow);"></i>
+        </div>
+        <div>
+          <div class="user-level-badge" style="background: var(--primary); color: white;">Portal do Educador</div>
+          <h1 class="user-name" id="prof-nome-display">Painel de Gestão Escolar</h1>
+          <p class="text-secondary text-sm">Acompanhe suas turmas do Ensino Fundamental II e crie missões interativas de Matemática.</p>
+        </div>
+      </div>
+      <div class="hero-actions" style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <button id="btn-modal-turma" class="btn btn-primary">
+          <i class="ph-bold ph-plus-circle"></i> Criar Nova Turma
+        </button>
+        <button id="btn-modal-tarefa" class="btn btn-accent">
+          <i class="ph-bold ph-paper-plane-tilt"></i> Atribuir Missão
+        </button>
+      </div>
+    </header>
+
+    <!-- METRICS GRID DO PROFESSOR -->
+    <section class="metrics-grid" style="margin: var(--space-xl) 0;">
+      <div class="metric-card card">
+        <div class="metric-icon purple"><i class="ph-bold ph-users-three"></i></div>
+        <div class="metric-value" id="prof-stat-turmas">0</div>
+        <div class="metric-label">Turmas Ativas</div>
+      </div>
+
+      <div class="metric-card card">
+        <div class="metric-icon blue"><i class="ph-bold ph-student"></i></div>
+        <div class="metric-value" id="prof-stat-alunos">0</div>
+        <div class="metric-label">Alunos Engajados</div>
+      </div>
+
+      <div class="metric-card card">
+        <div class="metric-icon emerald"><i class="ph-bold ph-target"></i></div>
+        <div class="metric-value" id="prof-stat-media">0%</div>
+        <div class="metric-label">Precisão Média das Turmas</div>
+      </div>
+
+      <div class="metric-card card">
+        <div class="metric-icon orange"><i class="ph-bold ph-check-square-offset"></i></div>
+        <div class="metric-value" id="prof-stat-tarefas">0</div>
+        <div class="metric-label">Missões Atribuídas</div>
+      </div>
+    </section>
+
+    <!-- VIDEOAULAS DE APOIO -->
+    <section class="learning-videos" aria-labelledby="professor-video-title">
+      <div class="learning-videos-heading">
+        <span class="learning-videos-icon"><i class="ph-bold ph-youtube-logo"></i></span>
+        <div>
+          <h2 id="professor-video-title">Videoaulas de Matemática</h2>
+          <p>Encontre aulas para revisar conteúdos ou compartilhar com suas turmas.</p>
+        </div>
+      </div>
+      <form class="learning-videos-search" action="https://www.youtube.com/results" method="get" target="_blank" rel="noopener noreferrer">
+        <label class="sr-only" for="teacher-video-search">Assunto da videoaula</label>
+        <input class="form-control" id="teacher-video-search" type="search" name="search_query" placeholder="Busque por um assunto ou conteúdo" minlength="2" required>
+        <button type="submit" class="btn btn-primary"><i class="ph-bold ph-magnifying-glass"></i> Buscar aulas</button>
+      </form>
+      <div class="learning-video-topics" aria-label="Assuntos sugeridos">
+        <a href="https://www.youtube.com/results?search_query=videoaula+matematica+numeros+inteiros+6+ano" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-calculator"></i> Números inteiros</a>
+        <a href="https://www.youtube.com/results?search_query=videoaula+equacao+do+primeiro+grau+8+ano" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-scales"></i> Equações</a>
+        <a href="https://www.youtube.com/results?search_query=videoaula+matematica+fracoes+6+ano" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-pizza"></i> Frações</a>
+      </div>
+    </section>
+
+    <!-- MAIN TWO COLUMN: LISTA DE TURMAS E RELATÓRIO DA TURMA -->
+    <div class="dashboard-grid">
+      
+      <!-- ESQUERDA: MINHAS TURMAS E CÓDIGOS -->
+      <div class="dash-column">
+        <section class="card">
+          <div class="card-header">
+            <h2><i class="ph-bold ph-books text-primary"></i> Suas Turmas</h2>
+            <span class="text-xs text-muted">Códigos de acesso</span>
+          </div>
+
+          <div id="prof-turmas-list" style="display: grid; gap: var(--space-md);">
+            <!-- Renderizado via JS -->
+            <div class="skeleton" style="height: 80px; border-radius: 12px;"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- DIREITA: RELATÓRIO DETALHADO DOS ALUNOS DA TURMA SELECIONADA -->
+      <div class="dash-column">
+        <section class="card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <div>
+              <h2 id="turma-titulo-selecionada"><i class="ph-bold ph-chart-line-up text-emerald-400"></i> Desempenho dos Alunos</h2>
+              <span class="text-xs text-muted" id="turma-subtitulo">Selecione uma turma para ver o relatório</span>
+            </div>
+            <button onclick="window.print()" class="btn btn-outline btn-sm">
+              <i class="ph-bold ph-printer"></i> Imprimir Relatório
+            </button>
+          </div>
+
+          <!-- TABELA DE ALUNOS -->
+          <div class="ranking-table" style="margin-top: 16px;">
+            <div class="ranking-list-header" style="grid-template-columns: 2fr 1fr 1fr 1fr;">
+              <span>Aluno</span>
+              <span>Nível</span>
+              <span>XP Total</span>
+              <span>Acertos</span>
+            </div>
+            <div id="prof-alunos-body">
+              <div class="text-center text-muted py-xl">
+                Selecione uma turma à esquerda para visualizar a lista de alunos.
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL: CRIAR NOVA TURMA -->
+  <div id="modal-criar-turma" class="gameover-overlay hidden">
+    <div class="gameover-modal card" style="max-width: 480px; text-align: left;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 class="text-xl font-bold"><i class="ph-bold ph-users-three text-primary"></i> Criar Nova Turma</h3>
+        <button class="btn btn-outline btn-sm close-modal" style="padding: 4px 8px;">✕</button>
+      </div>
+
+      <form id="form-criar-turma">
+        <div class="form-group">
+          <label class="form-label">Nome da Turma</label>
+          <input type="text" id="input-nome-turma" class="form-control" placeholder="Ex: 7º Ano A — Matemática" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Série / Ano Escolar</label>
+          <select id="select-serie-turma" class="form-control">
+            <option value="6º Ano">6º Ano do Ensino Fundamental</option>
+            <option value="7º Ano" selected>7º Ano do Ensino Fundamental</option>
+            <option value="8º Ano">8º Ano do Ensino Fundamental</option>
+            <option value="9º Ano">9º Ano do Ensino Fundamental</option>
+          </select>
+        </div>
+
+        <div style="margin-top: 24px; display: flex; gap: 12px; justify-content: flex-end;">
+          <button type="button" class="btn btn-outline close-modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary"><i class="ph-bold ph-check"></i> Gerar Turma</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ATRIBUIR MISSÃO / TAREFA -->
+  <div id="modal-criar-tarefa" class="gameover-overlay hidden">
+    <div class="gameover-modal card" style="max-width: 520px; text-align: left;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 class="text-xl font-bold"><i class="ph-bold ph-paper-plane-tilt text-emerald-400"></i> Atribuir Missão à Turma</h3>
+        <button class="btn btn-outline btn-sm close-modal" style="padding: 4px 8px;">✕</button>
+      </div>
+
+      <form id="form-criar-tarefa">
+        <div class="form-group">
+          <label class="form-label">Selecione a Turma</label>
+          <select id="select-tarefa-turma" class="form-control" required></select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Jogo da Missão</label>
+          <select id="select-tarefa-jogo" class="form-control" required>
+            <option value="1">🛸 Batalha Espacial das Operações (Inteiros)</option>
+            <option value="2">🏎️ Corrida das Tabuadas (Multiplicação)</option>
+            <option value="3">🍕 Pizza das Frações (Frações e Equivalências)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Título da Tarefa</label>
+          <input type="text" id="input-tarefa-titulo" class="form-control" placeholder="Ex: Tarefa da Semana — Treino de Inteiros" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label">Dificuldade</label>
+            <select id="select-tarefa-nivel" class="form-control">
+              <option value="facil">Fácil</option>
+              <option value="medio">Médio</option>
+              <option value="dificil">Difícil</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Meta de Pontos (XP)</label>
+            <input type="number" id="input-tarefa-meta" class="form-control" value="500" min="100" step="100">
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; display: flex; gap: 12px; justify-content: flex-end;">
+          <button type="button" class="btn btn-outline close-modal">Cancelar</button>
+          <button type="submit" class="btn btn-accent"><i class="ph-bold ph-paper-plane-tilt"></i> Enviar Missão</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const u = getUsuarioLocal();
+      if (!u) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Logout listener
+      document.getElementById('btn-logout')?.addEventListener('click', async () => {
+        await api.post('/auth/logout.php');
+        limparUsuarioLocal();
+        window.location.href = 'login.html';
+      });
+
+      const profNomeEl = document.getElementById('prof-nome-display');
+      if (profNomeEl) profNomeEl.textContent = `Olá, Prof. ${u.nome}`;
+
+      let turmasGlobais = [];
+      let turmaSelecionadaId = null;
+
+      // Carregar Turmas do Professor
+      async function carregarTurmas() {
+        try {
+          const res = await api.get('/professor/turmas.php');
+          if (res?.turmas) {
+            turmasGlobais = res.turmas;
+            document.getElementById('prof-stat-turmas').textContent = turmasGlobais.length;
+            
+            let totalAlunosSum = 0;
+            turmasGlobais.forEach(t => totalAlunosSum += parseInt(t.total_alunos || 0));
+            document.getElementById('prof-stat-alunos').textContent = totalAlunosSum;
+
+            renderTurmasList(turmasGlobais);
+
+            // Popula select de turmas no modal de tarefas
+            const selectTarefaTurma = document.getElementById('select-tarefa-turma');
+            selectTarefaTurma.innerHTML = turmasGlobais.map(t => `<option value="${t.id}">${t.nome_turma} (${t.codigo_turma})</option>`).join('');
+
+            // Seleciona primeira turma automaticamente
+            if (turmasGlobais.length > 0) {
+              carregarAlunosTurma(turmasGlobais[0].id, turmasGlobais[0].nome_turma, turmasGlobais[0].codigo_turma);
+            }
+          }
+        } catch (err) {
+          showToast('Erro ao carregar turmas: ' + err.message, 'error');
+        }
+      }
+
+      function renderTurmasList(turmas) {
+        const container = document.getElementById('prof-turmas-list');
+        if (!turmas.length) {
+          container.innerHTML = `
+            <div class="text-center text-muted py-lg">
+              <i class="ph-bold ph-books" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
+              Nenhuma turma cadastrada.<br>Clique em "Criar Nova Turma" para começar!
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = turmas.map(t => `
+          <div class="card turma-card-item ${turmaSelecionadaId === t.id ? 'active-turma' : ''}" 
+               style="cursor: pointer; padding: 16px; border: 1px solid ${turmaSelecionadaId === t.id ? 'var(--primary)' : 'var(--border-color)'}; background: ${turmaSelecionadaId === t.id ? 'rgba(124,58,237,0.15)' : 'var(--surface-card)'};"
+               onclick="selectTurma(${t.id}, '${t.nome_turma.replace(/'/g, "\\'")}', '${t.codigo_turma}')">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="badge badge-purple" style="font-size: 0.7rem;">${t.serie}</span>
+                <h3 class="text-base font-bold" style="margin-top: 4px;">${t.nome_turma}</h3>
+              </div>
+              <div class="text-right">
+                <span class="badge badge-emerald font-orbitron" style="font-size: 0.8rem;">${t.codigo_turma}</span>
+                <div class="text-xs text-muted" style="margin-top: 4px;"><i class="ph-bold ph-user-circle"></i> ${t.total_alunos} alunos</div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      window.selectTurma = (id, nome, codigo) => {
+        turmaSelecionadaId = id;
+        renderTurmasList(turmasGlobais);
+        carregarAlunosTurma(id, nome, codigo);
+      };
+
+      async function carregarAlunosTurma(turmaId, nomeTurma, codigoTurma) {
+        document.getElementById('turma-titulo-selecionada').innerHTML = `<i class="ph-bold ph-chart-line-up text-emerald-400"></i> ${nomeTurma}`;
+        document.getElementById('turma-subtitulo').textContent = `Código para Alunos: ${codigoTurma}`;
+        
+        const bodyEl = document.getElementById('prof-alunos-body');
+        bodyEl.innerHTML = '<div class="text-center text-muted py-lg">⏳ Carregando alunos...</div>';
+
+        try {
+          const res = await api.get('/professor/turmas.php', { action: 'detalhes_turma', turma_id: turmaId });
+          if (res?.alunos) {
+            if (!res.alunos.length) {
+              bodyEl.innerHTML = `
+                <div class="text-center text-muted py-xl">
+                  Nenhum aluno entrou nesta turma ainda.<br>
+                  Passe o código <strong class="text-emerald-400 font-orbitron">${codigoTurma}</strong> para os seus alunos!
+                </div>
+              `;
+              return;
+            }
+
+            bodyEl.innerHTML = res.alunos.map(a => {
+              const totalOp = parseInt(a.acertos_totais) + parseInt(a.erros_totais);
+              const prec = totalOp > 0 ? Math.round((parseInt(a.acertos_totais) / totalOp) * 100) : 0;
+              return `
+                <div class="ranking-row" style="grid-template-columns: 2fr 1fr 1fr 1fr;">
+                  <div class="rank-user">
+                    <div class="rank-avatar">${getAvatar(a.avatar || 1)}</div>
+                    <div>
+                      <div class="rank-name">${a.nome}</div>
+                      <div class="text-xs text-muted">${a.email}</div>
+                    </div>
+                  </div>
+                  <div><span class="badge badge-purple">Nível ${a.nivel_atual}</span></div>
+                  <div class="rank-score font-orbitron">${formatScore(a.xp_total)} XP</div>
+                  <div class="font-bold text-emerald-400">${prec}% acertos</div>
+                </div>
+              `;
+            }).join('');
+          }
+        } catch (err) {
+          showToast('Erro ao carregar detalhes: ' + err.message, 'error');
+        }
+      }
+
+      // Modais
+      const modalTurma = document.getElementById('modal-criar-turma');
+      const modalTarefa = document.getElementById('modal-criar-tarefa');
+
+      document.getElementById('btn-modal-turma')?.addEventListener('click', () => modalTurma.classList.remove('hidden'));
+      document.getElementById('btn-modal-tarefa')?.addEventListener('click', () => modalTarefa.classList.remove('hidden'));
+
+      document.querySelectorAll('.close-modal').forEach(btn => {
+        btn.addEventListener('click', () => {
+          modalTurma.classList.add('hidden');
+          modalTarefa.classList.add('hidden');
+        });
+      });
+
+      // Submit Criar Turma
+      document.getElementById('form-criar-turma')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nome = document.getElementById('input-nome-turma').value;
+        const serie = document.getElementById('select-serie-turma').value;
+
+        try {
+          const res = await api.post('/professor/turmas.php', {
+            action: 'criar_turma',
+            nome_turma: nome,
+            serie: serie
+          });
+
+          if (res?.sucesso) {
+            showToast(`Turma criada! Código: ${res.codigo_turma} 🎉`, 'success', 6000);
+            modalTurma.classList.add('hidden');
+            document.getElementById('form-criar-turma').reset();
+            carregarTurmas();
+          }
+        } catch (err) {
+          showToast('Erro ao criar turma: ' + err.message, 'error');
+        }
+      });
+
+      // Submit Atribuir Tarefa
+      document.getElementById('form-criar-tarefa')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const turmaId = document.getElementById('select-tarefa-turma').value;
+        const jogoId = document.getElementById('select-tarefa-jogo').value;
+        const titulo = document.getElementById('input-tarefa-titulo').value;
+        const nivel = document.getElementById('select-tarefa-nivel').value;
+        const meta = document.getElementById('input-tarefa-meta').value;
+
+        try {
+          const res = await api.post('/professor/turmas.php', {
+            action: 'criar_tarefa',
+            turma_id: turmaId,
+            jogo_id: jogoId,
+            titulo: titulo,
+            nivel: nivel,
+            meta_pontuacao: meta
+          });
+
+          if (res?.sucesso) {
+            showToast('Missão enviada para a turma! 🚀', 'success');
+            modalTarefa.classList.add('hidden');
+            document.getElementById('form-criar-tarefa').reset();
+          }
+        } catch (err) {
+          showToast('Erro ao atribuir missão: ' + err.message, 'error');
+        }
+      });
+
+      carregarTurmas();
+    });
+
+    // Hamburger menu toggle
+    document.getElementById('nav-toggle')?.addEventListener('click', () => {
+      document.getElementById('nav-links')?.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

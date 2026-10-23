@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogaê — Aprenda Matemática Jogando!</title>
+  <script src="../js/theme.js"></script>
+  <meta name="description" content="Plataforma educacional gamificada de Matemática para o Ensino Fundamental II. Batalhas espaciais, equações e gestão escolar para alunos e professores.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/landing.css">
+</head>
+<body data-page="landing">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="../../assets/img/logo.png" alt="Jogaê Logo" class="nav-logo-img">
+      </a>
+
+      <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Menu">
+        <i class="ph-bold ph-list"></i>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#recursos" class="nav-link"><i class="ph-bold ph-sparkle"></i> Recursos</a>
+        <a href="login.html" class="btn btn-outline btn-sm">Entrar</a>
+        <a href="cadastro.html" class="btn btn-primary btn-sm">Criar Conta</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container landing-main">
+    <section class="landing-hero" aria-labelledby="landing-title">
+      <div class="landing-copy">
+        <div class="landing-eyebrow">
+          <i class="ph-bold ph-sparkle" aria-hidden="true"></i>
+          Matemática para o Ensino Fundamental II
+        </div>
+        <h1 id="landing-title" class="landing-title">
+          Matemática que se aprende <span>jogando.</span>
+        </h1>
+        <p class="landing-description">
+          O Jogaê transforma exercícios em desafios interativos. Explore jogos, acompanhe sua evolução e leve a matemática para além da sala de aula.
+        </p>
+        <div class="landing-actions">
+          <a href="cadastro.html" class="btn btn-primary btn-lg">
+            <i class="ph-bold ph-rocket-launch" aria-hidden="true"></i> Conheça a plataforma
+          </a>
+          <a href="#experiencias" class="btn btn-outline btn-lg">Ver como funciona</a>
+        </div>
+        <div class="landing-audience" aria-label="Para quem é o Jogaê">
+          <span><i class="ph-bold ph-student" aria-hidden="true"></i> Para estudantes</span>
+          <span><i class="ph-bold ph-chalkboard-teacher" aria-hidden="true"></i> Para educadores</span>
+        </div>
+      </div>
+
+      <div class="landing-showcase" aria-label="Prévia das experiências de aprendizagem do Jogaê">
+        <div class="showcase-topbar">
+          <div class="showcase-brand">
+            <img src="../../assets/img/logo.png" alt="">
+            <span>Jogaê</span>
+          </div>
+          <span class="showcase-status"><i class="ph-fill ph-circle" aria-hidden="true"></i> Aprender em ação</span>
+        </div>
+        <div class="showcase-welcome">
+          <small>UMA NOVA FORMA DE ESTUDAR</small>
+          <strong>Aprenda no seu ritmo</strong>
+          <p>Pratique, descubra e avance a cada desafio.</p>
+        </div>
+        <div class="showcase-label">Experiências matemáticas</div>
+        <div class="showcase-games">
+          <div class="showcase-game">
+            <i class="ph-bold ph-planet" aria-hidden="true"></i>
+            <strong>Batalha Espacial</strong>
+          </div>
+          <div class="showcase-game">
+            <i class="ph-bold ph-car-simple" aria-hidden="true"></i>
+            <strong>Corrida das Tabuadas</strong>
+          </div>
+          <div class="showcase-game">
+            <i class="ph-bold ph-pizza" aria-hidden="true"></i>
+            <strong>Pizza das Frações</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recursos" class="landing-section" aria-labelledby="resources-title">
+      <div class="landing-section-heading">
+        <span class="landing-section-label">O que você encontra</span>
+        <h2 id="resources-title">Uma plataforma feita para aprender fazendo</h2>
+        <p>O Jogaê reúne atividades, acompanhamento e recursos para apoiar o aprendizado de matemática.</p>
+      </div>
+      <div class="landing-card-grid">
+        <article class="landing-card">
+          <div class="landing-card-icon"><i class="ph-bold ph-game-controller" aria-hidden="true"></i></div>
+          <h3>Jogos de matemática</h3>
+          <p>Pratique frações, números inteiros e multiplicação com jogos interativos para diferentes conteúdos.</p>
+          <a class="landing-card-link" href="cadastro.html">Conhecer o Jogaê <i class="ph-bold ph-arrow-right" aria-hidden="true"></i></a>
+        </article>
+        <article class="landing-card">
+          <div class="landing-card-icon"><i class="ph-bold ph-chart-line-up" aria-hidden="true"></i></div>
+          <h3>Progresso e conquistas</h3>
+          <p>Acompanhe partidas, pontos de experiência, evolução e conquistas em uma área pessoal.</p>
+          <a class="landing-card-link" href="cadastro.html">Começar a aprender <i class="ph-bold ph-arrow-right" aria-hidden="true"></i></a>
+        </article>
+        <article class="landing-card">
+          <div class="landing-card-icon"><i class="ph-bold ph-users-three" aria-hidden="true"></i></div>
+          <h3>Aprendizagem em conjunto</h3>
+          <p>Estudantes podem se conectar a uma turma e receber missões organizadas pelo professor.</p>
+          <a class="landing-card-link" href="cadastro.html">Explorar a plataforma <i class="ph-bold ph-arrow-right" aria-hidden="true"></i></a>
+        </article>
+      </div>
+    </section>
+
+    <section id="experiencias" class="landing-section" aria-labelledby="experience-title">
+      <div class="landing-section-heading">
+        <span class="landing-section-label">Simples de começar</span>
+        <h2 id="experience-title">Seu aprendizado em três passos</h2>
+        <p>Da criação da conta aos desafios de matemática, tudo começa por aqui.</p>
+      </div>
+      <div class="landing-steps">
+        <article class="landing-step">
+          <h3>Crie sua conta</h3>
+          <p>Escolha seu perfil de estudante ou professor para acessar os recursos da plataforma.</p>
+        </article>
+        <article class="landing-step">
+          <h3>Explore os conteúdos</h3>
+          <p>Encontre jogos e videoaulas para revisar os temas de matemática de um jeito diferente.</p>
+        </article>
+        <article class="landing-step">
+          <h3>Acompanhe sua evolução</h3>
+          <p>Consulte seu progresso, conquistas e atividades dentro da sua área pessoal.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="landing-cta" aria-labelledby="landing-cta-title">
+      <div>
+        <h2 id="landing-cta-title">Vamos aprender juntos?</h2>
+        <p>Conheça o Jogaê e descubra uma nova maneira de praticar matemática.</p>
+      </div>
+      <a href="cadastro.html" class="btn btn-lg">
+        <i class="ph-bold ph-user-plus" aria-hidden="true"></i> Criar minha conta
+      </a>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="landing-footer">
+    <div class="container">
+      <img src="../../assets/img/logo.png" alt="Jogaê">
+      <p>© 2026 Jogaê — Plataforma de aprendizagem de matemática.</p>
+    </div>
+  </footer>
+
+  <script src="../js/api.js"></script>
+  <script>
+    // Hamburger menu toggle
+    document.getElementById('nav-toggle')?.addEventListener('click', () => {
+      document.getElementById('nav-links')?.classList.toggle('open');
+    });
+
+    // Scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
